@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const adminRoutes = require("./admin");
 
-// Book routes
+// Admin routes
 router.use("/admin", adminRoutes);
 
 module.exports = router;
