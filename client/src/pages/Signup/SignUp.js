@@ -41,10 +41,11 @@ handleFormSubmit = event => {
     event.preventDefault();
     // check if the user fill out all informations
     if(this.state.firstName && this.state.lastName && this.state.userName && this.state.email && this.state.password ) {
+		// save all the information to database
         API.saveAdmin({
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            userName : this.state.userName,
+            firstname: this.state.firstName,
+            lastname: this.state.lastName,
+            username : this.state.userName,
             email: this.state.email,
             password: this.state.password
         })
