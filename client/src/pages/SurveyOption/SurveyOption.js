@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Route, Link } from 'react-router-dom'
+import Navbar from '../../components/Navbar'
 // components
 // import Signup from '../Signup'
 // import LoginForm from '../Login'
@@ -29,7 +30,7 @@ class SurveyOption extends Component {
   }
 
   getUser() {
-    axios.get('/user/').then(response => {
+    axios.get('/api/admin/login').then(response => {
       console.log('Get user response: ')
       console.log(response.data)
       if (response.data.user) {
@@ -51,9 +52,13 @@ class SurveyOption extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="Surveyoption">
 
-        <h1>SurveyOption</h1>
+        <Navbar updateUser ={this.updateUser} loggedIn ={this.state.loggedIn}/>
+        {
+            this.state.loggedIn && 
+            <p>{this.state.username}</p>
+        }
       </div>
     );
   }

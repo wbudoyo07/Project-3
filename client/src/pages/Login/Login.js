@@ -30,23 +30,23 @@ class LoginForm extends Component {
                 password: this.state.password
             })
             .then(response => {
-                                   // update the state to redirect to home
-                                   this.setState({
-                                    redirectTo: '/surveyoption'
-                                })
-                // console.log('login response: ')
-                // console.log(response)
-                // if (response.status === 200) {
-                //     // update App.js state
-                //     this.props.updateUser({
-                //         loggedIn: true,
-                //         username: response.data.username
-                //     })
-                //     // update the state to redirect to home
-                //     this.setState({
-                //         redirectTo: '/surveyOption'
-                //     })
-                // }
+                                //    // update the state to redirect to surveyoption
+                                //    this.setState({
+                                //     redirectTo: '/surveyoptions'
+                                // })
+                console.log('login response: ')
+                console.log(response)
+                if (response.status === 200) {
+                    // update App.js state
+                    this.props.updateUser({
+                        loggedIn: true,
+                        username: response.data.username
+                    })
+                    // update the state to redirect to home
+                    this.setState({
+                        redirectTo: '/surveyoptions'
+                    })
+                }
             }).catch(error => {
                 console.log('login error: ')
                 console.log(error);
