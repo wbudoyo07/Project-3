@@ -35,9 +35,9 @@ router.get('/login', (req, res, next) => {
     console.log(req.user)
 
     if (req.user) {
-        res.json({ userLoggin: req.user })
+        res.json({ userLoggedin: req.user })
     } else {
-        res.json({ userLoggin: null })
+        res.json({ userLoggedin: null })
     }
 });
 

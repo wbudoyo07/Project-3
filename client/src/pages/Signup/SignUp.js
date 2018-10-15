@@ -5,6 +5,9 @@ class Signup extends Component {
 	constructor() {
 		super()
 		this.state = {
+			firstname: '',
+			lastname: '',
+			email:'',
 			username: '',
 			password: '',
 			confirmPassword: '',
@@ -25,6 +28,9 @@ class Signup extends Component {
 
 		//request to server to add a new username/password
 		API.saveAdmin({
+			firstname: this.state.firstname,
+			lastname: this.state.lastname,
+			email: this.state.email,
 			username: this.state.username,
 			password: this.state.password
 		})
@@ -51,6 +57,51 @@ render() {
 		<div className="SignupForm">
 			<h4>Sign up</h4>
 			<form className="form-horizontal">
+			<div className="form-group">
+					<div className="col-1 col-ml-auto">
+						<label className="form-label" htmlFor="firstname">First Name</label>
+					</div>
+					<div className="col-3 col-mr-auto">
+						<input className="form-input"
+							type="text"
+							id="firstname"
+							name="firstname"
+							placeholder="First Name"
+							value={this.state.firstname}
+							onChange={this.handleChange}
+						/>
+					</div>
+				</div>
+				<div className="form-group">
+					<div className="col-1 col-ml-auto">
+						<label className="form-label" htmlFor="lastname">Last Name</label>
+					</div>
+					<div className="col-3 col-mr-auto">
+						<input className="form-input"
+							type="text"
+							id="lastname"
+							name="lastname"
+							placeholder="Last Name"
+							value={this.state.lastname}
+							onChange={this.handleChange}
+						/>
+					</div>
+				</div>
+				<div className="form-group">
+					<div className="col-1 col-ml-auto">
+						<label className="form-label" htmlFor="email">Email</label>
+					</div>
+					<div className="col-3 col-mr-auto">
+						<input className="form-input"
+							type="text"
+							id="email"
+							name="email"
+							placeholder="Email"
+							value={this.state.email}
+							onChange={this.handleChange}
+						/>
+					</div>
+				</div>
 				<div className="form-group">
 					<div className="col-1 col-ml-auto">
 						<label className="form-label" htmlFor="username">Username</label>
