@@ -1,3 +1,7 @@
 # Project-3
 
-Voting based survey MERN application 
+Ranked Choice Voting based survey 
+
+MERN application 
+
+
