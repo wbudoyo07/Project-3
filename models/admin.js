@@ -1,20 +1,21 @@
-const mongoose = require ("mongoose");
-const Schema = mongoose.Schema;
-const bcrypt = require("bcrypt");
-const SALT_WORK_FACTOR = 10;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const bcrypt = require('bcryptjs');
+mongoose.promise = Promise
 
+//Define admin Schema
 const adminSchema = new Schema ({
     firstname :{
         type: String,
-        required: true
+        required: false
     },
     lastname: {
         type: String,
-        require: true
+        require: false
     },
     username: {
         type: String,
-        require: true
+        require: false
     },
     password: {
         type: String,
@@ -22,35 +23,32 @@ const adminSchema = new Schema ({
     },
     email: {
         type: String,
-        require: true
+        require: false
     }
 });
 
-adminSchema.pre('save', function(next) {
-    let user = this;
+// Define schema methods
+adminSchema.methods = {
+	checkPassword: function (inputPassword) {
+		return bcrypt.compareSync(inputPassword, this.password)
+	},
+	hashPassword: plainTextPassword => {
+		return bcrypt.hashSync(plainTextPassword, 10)
+	}
+};
 
-    // only has the password if it has been modified (or is new)
-    if(!user.isModified('password')) return next();
-
-    //generate a salt
-    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
-        if(err) return next(err);
-
-        // has the password using new salt
-        bcrypt.hash(user.password, salt, function(err, hash) {
-            if(err) return next(err);
-
-            user.password= hash;
-            next();
-        });
-    });
-});
-
-adminSchema.methods.comparePassword = function( candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-        cb(null, isMatch);
-    });
-}
+// Define hooks for pre-saving
+adminSchema.pre('save', function (next) {
+	if (!this.password) {
+		console.log('models/user.js =======NO PASSWORD PROVIDED=======')
+		next()
+	} else {
+		console.log('models/user.js hashPassword in pre save');
+		
+		this.password = this.hashPassword(this.password)
+		next()
+	}
+})
 
 const Admin = mongoose.model("Admin", adminSchema);
 

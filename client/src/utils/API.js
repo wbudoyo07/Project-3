@@ -13,8 +13,13 @@ export default {
   deleteAdmin: function(id) {
     return axios.delete("/api/admin/" + id);
   },
-  // Saves a adminstrator  data to the database
+  // register  new  adminstrator  data to the database
   saveAdmin: function(adminData) {
     return axios.post("/api/admin",adminData);
+  },
+
+  // Authenticates  the existed user in the DB
+  login: function(loginData) {
+    return axios.post("/api/login", loginData);
   }
 };
