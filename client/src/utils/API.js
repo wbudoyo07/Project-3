@@ -19,7 +19,7 @@ export default {
   },
 
   // Authenticates  the existed user in the DB
-  login: function(loginData) {
-    return axios.post("/api/login", loginData);
+  loginIn: function(loginData) {
+    return axios.post("/api/admin/login", loginData);
   }
 };

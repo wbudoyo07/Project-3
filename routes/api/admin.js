@@ -26,17 +26,18 @@ router.post(
         let  userInfo = {
             username: req.user.username
         };
-        res.send(userInfo);
+        res.send(req.user);
     }
 );
 
 router.get('/login', (req, res, next) => {
     console.log('===== user!!======')
     console.log(req.user)
+
     if (req.user) {
-        res.json({ user: req.user })
+        res.json({ userLoggin: req.user })
     } else {
-        res.json({ user: null })
+        res.json({ userLoggin: null })
     }
 });
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
-import axios from 'axios'
+import API from "../../utils/API"
 
 class LoginForm extends Component {
     constructor() {
@@ -25,25 +25,28 @@ class LoginForm extends Component {
         event.preventDefault()
         console.log('handleSubmit')
 
-        axios
-            .post('/api/admin/login', {
+        API.loginIn( {
                 username: this.state.username,
                 password: this.state.password
             })
             .then(response => {
-                console.log('login response: ')
-                console.log(response)
-                if (response.status === 200) {
-                    // update App.js state
-                    this.props.updateUser({
-                        loggedIn: true,
-                        username: response.data.username
-                    })
-                    // update the state to redirect to home
-                    this.setState({
-                        redirectTo: '/'
-                    })
-                }
+                                   // update the state to redirect to home
+                                   this.setState({
+                                    redirectTo: '/surveyoption'
+                                })
+                // console.log('login response: ')
+                // console.log(response)
+                // if (response.status === 200) {
+                //     // update App.js state
+                //     this.props.updateUser({
+                //         loggedIn: true,
+                //         username: response.data.username
+                //     })
+                //     // update the state to redirect to home
+                //     this.setState({
+                //         redirectTo: '/surveyOption'
+                //     })
+                // }
             }).catch(error => {
                 console.log('login error: ')
                 console.log(error);
