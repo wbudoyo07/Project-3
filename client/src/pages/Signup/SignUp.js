@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Button } from 'reactstrap';
 import API from "../../utils/API"
 
 class Signup extends Component {
@@ -133,11 +134,13 @@ render() {
 				</div>
 				<div className="form-group ">
 					<div className="col-7"></div>
-					<button
-						className="btn btn-primary col-1 col-mr-auto"
-						onClick={this.handleSubmit}
-						type="submit"
-					>Sign up</button>
+					<Button 
+					className="btn btn-primary col-1 col-mr-auto"
+					onClick={this.handleSubmit}
+					type="submit"
+					color ="danger" > 
+					Sign up 
+					</Button>
 				</div>
 			</form>
 		</div>
