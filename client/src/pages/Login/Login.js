@@ -32,6 +32,7 @@ class LoginForm extends Component {
             .then(response => {
                                 //    // update the state to redirect to surveyoption
                                    this.setState({
+                                    loggedIn: true,
                                     redirectTo: '/surveyoptions'
                                 })
             //     console.log('login response: ')
