@@ -48,6 +48,11 @@ class SurveyOption extends Component {
     })
   }
 
+  handleSubmit(event) {
+    this.setState({
+        [event.target.name]: event.target.value
+    })
+}
   render() {
     return (
       <Container className="Surveyoption">
@@ -56,8 +61,21 @@ class SurveyOption extends Component {
           <Row>
             <Col>
             <p>{this.state.username} {this.state.email}</p>
-            <Button> Create Survey </Button>
-            <Button> Previous Survey </Button>
+            <Button
+            type = "submit"
+            color = "danger"
+            name  =  "createSurvey"
+            onClick = {this.handleSubmit}
+            > Create Survey 
+            </Button>
+            <Button
+            type = "submit"
+            color = "danger"
+            name = "create Survey"
+            onClick = {this.handleSubmit}
+            > 
+            Previous Survey
+             </Button>
             </Col>
           </Row>
         }
