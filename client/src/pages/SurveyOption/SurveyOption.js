@@ -33,12 +33,12 @@ class SurveyOption extends Component {
     axios.get('/api/admin/login').then(response => {
       console.log('Get user response: ')
       console.log(response.data)
-      if (response.data.user) {
+      if (response.data.userLoggedin) {
         console.log('Get User: There is a user saved in the server session: ')
 
         this.setState({
           loggedIn: true,
-          username: response.data.user.username
+          username: response.data.userLoggedin.username
         })
       } else {
         console.log('Get user: no user');

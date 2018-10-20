@@ -12,7 +12,7 @@ class Navbar extends Component {
     logout(event) {
         event.preventDefault()
         console.log('logging out')
-        axios.post('/user/logout').then(response => {
+        axios.post('/api/admin/logout').then(response => {
           console.log(response.data)
           if (response.status === 200) {
             this.props.updateUser({
@@ -42,15 +42,10 @@ class Navbar extends Component {
 
                             </section>
                         ) : (
-                                <section className="navbar-section">
-                                    <Link to="/surveyoptions" className="btn btn-link text-secondary">
-                                        <span className="text-secondary">home</span>
-                                        </Link>
-                                    <Link to="/login" className="btn btn-link text-secondary">
-                                    <span className="text-secondary">login</span>
-				</Link>
-
-                                </section>
+                            <div>
+                                Please log in first!!
+                                <a href ="/"> Login</a>
+                             </div>
                             )}
                     </div>
 
