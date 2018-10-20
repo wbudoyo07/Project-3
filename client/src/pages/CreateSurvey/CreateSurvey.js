@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Navbar from "../../components/Navbar";
 import axios from "axios";
 
 class CreateSurvey extends Component {
@@ -28,21 +29,24 @@ handleFormSubmit = event => {
 render() {
     return(
         <div>
-       <form>
-           <input  
-           type="text"
-           id="recipient"
-           name="recipient"
-           placeholder="Phone number"
-           value ={this.state.recipient}
-           onChange ={this.handleChange }
-           />
-           <br/>
-           <button
-            onClick={this.handleFormSubmit}>
-               submit
-            </button>
-       </form>
+        <Navbar updateUser ={this.updateUser} loggedIn ={this.state.loggedIn}/>
+        {
+            <form>
+            <input  
+            type="text"
+            id="recipient"
+            name="recipient"
+            placeholder="Phone number"
+            value ={this.state.recipient}
+            onChange ={this.handleChange }
+            />
+            <br/>
+            <button
+             onClick={this.handleFormSubmit}>
+                submit
+             </button>
+        </form>
+        }
         </div>
 
     )
