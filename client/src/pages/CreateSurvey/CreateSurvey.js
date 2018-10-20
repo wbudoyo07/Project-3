@@ -11,9 +11,10 @@ class CreateSurvey extends Component {
 
     state = {
         items: [],
-        title: "",
+        title: ""
+        // ,
         // author: "",
-        synopsis: ""
+        // details: ""
       };
     
       componentDidMount() {
@@ -23,7 +24,7 @@ class CreateSurvey extends Component {
       loadItems = () => {
         API.getItems()
           .then(res =>
-            this.setState({ items: res.data, title: "", synopsis: "" })
+            this.setState({ items: res.data, title: ""})
           )
           .catch(err => console.log(err));
       };
@@ -49,7 +50,7 @@ class CreateSurvey extends Component {
           API.saveItem({
             title: this.state.title,
             // author: this.state.author,
-            synopsis: this.state.synopsis
+            // details: this.state.details
           })
             .then(res => this.loadItems())
             .catch(err => console.log(err));
@@ -69,7 +70,7 @@ class CreateSurvey extends Component {
                     value={this.state.title}
                     onChange={this.handleInputChange}
                     name="title"
-                    placeholder="Title (required)"
+                    placeholder="Item Title (required)"
                   />
                   {/* <Input
                     value={this.state.author}
@@ -77,12 +78,12 @@ class CreateSurvey extends Component {
                     name="author"
                     placeholder="Author (required)"
                   /> */}
-                  <TextArea
-                    value={this.state.synopsis}
+                  {/* <TextArea
+                    value={this.state.details}
                     onChange={this.handleInputChange}
                     name="details"
                     placeholder="Details (Optional)"
-                  />
+                  /> */}
                   <FormBtn
                     disabled={!(
                       // this.state.author && 
