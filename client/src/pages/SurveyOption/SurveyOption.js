@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import { Route, Link } from 'react-router-dom'
-import API from '../../'
-import Navbar from '../../components/Navbar'
-// components
-// import Signup from '../Signup'
-// import LoginForm from '../Login'
-// import Navbar from './components/navbar'
-// import Home from './components/home'
-
+import API from "../../utils/API"
+import { Route, Link } from 'react-router-dom';
+import Navbar from '../../components/Navbar';
+import { Button, Container, Row, Col } from "reactstrap";
 class SurveyOption extends Component {
   constructor() {
     super()
@@ -32,7 +26,7 @@ class SurveyOption extends Component {
   }
 
   getUser() {
-    axios.get('/api/admin/login').then(response => {
+    API.loginInData().then(response => {
       console.log('Get user response: ')
       console.log(response.data)
       if (response.data.userLoggedin) {
@@ -56,16 +50,18 @@ class SurveyOption extends Component {
 
   render() {
     return (
-      <div className="Surveyoption">
-
+      <Container className="Surveyoption">
         <Navbar updateUser ={this.updateUser} loggedIn ={this.state.loggedIn}/>
         {
-            this.state.loggedIn && 
+          <Row>
+            <Col>
             <p>{this.state.username} {this.state.email}</p>
-
-
+            <Button> Create Survey </Button>
+            <Button> Previous Survey </Button>
+            </Col>
+          </Row>
         }
-      </div>
+      </Container>
     );
   }
 }
