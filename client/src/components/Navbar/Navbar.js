@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Route, Link } from 'react-router-dom';
+import API from '../../utils/API'
 import axios from 'axios';
 
 class Navbar extends Component {
@@ -12,13 +13,16 @@ class Navbar extends Component {
     logout(event) {
         event.preventDefault()
         console.log('logging out')
-        axios.post('/api/admin/logout').then(response => {
+        API.logout().then(response => {
           console.log(response.data)
+        //    go back to home back when logging
+          window.location.href ="/"
           if (response.status === 200) {
             this.props.updateUser({
               loggedIn: false,
               username: null
             })
+
           }
         }).catch(error => {
             console.log('Logout error')
@@ -37,8 +41,10 @@ class Navbar extends Component {
                     <div className="col-4" >
                         {loggedIn ? (
                             <section className="navbar-section">
-                                <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
-                                <span className="text-secondary">logout</span></Link>
+
+                                <a  href ="/" className="btn btn-link text-secondary" onClick={this.logout}> log out </a>
+                                <a  href ="/" className="btn btn-link text-secondary" > Create a Survey </a>
+
 
                             </section>
                         ) : (

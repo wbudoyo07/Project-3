@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import { Route, Link } from 'react-router-dom'
+import API from '../../'
 import Navbar from '../../components/Navbar'
 // components
 // import Signup from '../Signup'
@@ -13,7 +14,8 @@ class SurveyOption extends Component {
     super()
     this.state = {
       loggedIn: false,
-      username: null
+      username: null,
+      email:null
     }
 
     this.getUser = this.getUser.bind(this)
@@ -38,7 +40,9 @@ class SurveyOption extends Component {
 
         this.setState({
           loggedIn: true,
-          username: response.data.userLoggedin.username
+          username: response.data.userLoggedin.username,
+          email: response.data.userLoggedin.email
+
         })
       } else {
         console.log('Get user: no user');
@@ -57,7 +61,9 @@ class SurveyOption extends Component {
         <Navbar updateUser ={this.updateUser} loggedIn ={this.state.loggedIn}/>
         {
             this.state.loggedIn && 
-            <p>{this.state.username}</p>
+            <p>{this.state.username} {this.state.email}</p>
+
+
         }
       </div>
     );
