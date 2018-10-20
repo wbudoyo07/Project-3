@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
-
+import axios from "axios";
 class CreateSurvey extends Component {
 
     state = {
         items: [],
-        title: ""
+        title: "",
+        recipient: ""
         // ,
         // author: "",
         // details: ""
@@ -28,7 +29,13 @@ class CreateSurvey extends Component {
           )
           .catch(err => console.log(err));
       };
-    
+
+    // send message to twilio routes
+    sendText = ()=> {
+      axios.get(`/api/twilio/sendText?recipient=+1${this.state.recipient}&textMessage=www.google.com`)
+      .catch(err =>  console.log(err));
+      }
+
       deleteItem = id => {
         API.deleteItem(id)
           .then(res => this.loadItems())
@@ -41,12 +48,12 @@ class CreateSurvey extends Component {
           [name]: value
         });
       };
-    
       handleFormSubmit = event => {
         event.preventDefault();
         if (this.state.title
           // && this.state.author
           ) {
+          this.sendText();
           API.saveItem({
             title: this.state.title,
             // author: this.state.author,
@@ -71,6 +78,12 @@ class CreateSurvey extends Component {
                     onChange={this.handleInputChange}
                     name="title"
                     placeholder="Item Title (required)"
+                  />
+                  <Input
+                    value={this.state.recipient}
+                    onChange={this.handleInputChange}
+                    name="recipient"
+                    placeholder="Phone Number"
                   />
                   {/* <Input
                     value={this.state.author}

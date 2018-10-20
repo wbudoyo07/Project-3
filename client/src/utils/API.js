@@ -37,5 +37,10 @@ export default {
   // Saves a Item to the database
   saveItem: function(itemData) {
     return axios.post("/api/items", itemData);
+  },
+
+  //Twilio send message
+  sendText : function() {
+    return axios.get("/api/twilio/sendText");
   }
 };
