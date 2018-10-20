@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "../../components/Navbar";
 import axios from "axios";
+import { Form, FormGroup, Input, Button } from "reactstrap";
 
 class CreateSurvey extends Component {
 state = {
@@ -21,6 +22,7 @@ handleChange= event => {
     });
    
 };
+
 handleFormSubmit = event => {
     event.preventDefault();
     this.sendText();
@@ -28,27 +30,44 @@ handleFormSubmit = event => {
 }
 render() {
     return(
+        // <div>
+        // <Navbar updateUser ={this.updateUser} loggedIn ={this.state.loggedIn}/>
+        // {
+        // //     <input  
+        // //     type="text"
+        // //     id="recipient"
+        // //     name="recipient"
+        // //     placeholder="Phone number"
+        // //     value ={this.state.recipient}
+        // //     onChange ={this.handleChange }
+        // //     />
+        // //     <br/>
+        // //     <button
+        // //      onClick={this.handleFormSubmit}>
+        // //         submit
+        // //      </button>
+        // // </form>
+        // }
+        // </div>
         <div>
-        <Navbar updateUser ={this.updateUser} loggedIn ={this.state.loggedIn}/>
-        {
-            <form>
-            <input  
-            type="text"
-            id="recipient"
-            name="recipient"
-            placeholder="Phone number"
-            value ={this.state.recipient}
-            onChange ={this.handleChange }
-            />
-            <br/>
-            <button
-             onClick={this.handleFormSubmit}>
-                submit
-             </button>
-        </form>
-        }
+                <Form>
+                <FormGroup>
+                    <Input
+                        type="text"
+                        id="recipient"
+                        name="recipient"
+                        placeholder="Phone number"
+                        value ={this.state.recipient}
+                        onChange ={this.handleChange }
+                    />
+                    <Button
+                    onClick={this.handleFormSubmit}
+                    >
+                    Submit
+                    </Button>
+                </FormGroup>
+            </Form>
         </div>
-
     )
 }
 };
