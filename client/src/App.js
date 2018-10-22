@@ -9,6 +9,7 @@ import SignUp from "./pages/Signup";
 import SurveyOption from "./pages/SurveyOption";
 import VoteResults from "./pages/VoteResults";
 import NoMatch from "./pages/NoMatch";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => (
   <Router>
@@ -16,14 +17,16 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Login} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/aboutus" component={AboutUs} />
         <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/aboutus" component={AboutUs} />
-        <Route exact path="/surveyoptions" component={SurveyOption} />
-        <Route exact path="/createsurvey" component={CreateSurvey} />
-        <Route exact path="/previousSurvey" component={PreviousSurvey} />
         <Route exact path="/AnswerSurvey" component={AnswerSurvey} />
-        <Route exact path="/VoteResults" component={VoteResults} />
+        {/* In Order to access to private route the use must logged in */}
+        <PrivateRoute exact path="/aboutus" component={AboutUs} />
+        <PrivateRoute exact path="/surveyoptions" component={SurveyOption} />
+        <PrivateRoute exact path="/createsurvey" component={CreateSurvey} />
+        <PrivateRoute exact path="/previousSurvey" component={PreviousSurvey} />
+        <PrivateRoute exact path="/VoteResults" component={VoteResults} />
+        {/* No match routes must be on bottom if it on the top,
+          it will render first before calling the PrivateRoute */}
         <Route component= {NoMatch}/>
       </Switch>
     </div>
