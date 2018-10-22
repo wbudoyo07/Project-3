@@ -34,8 +34,8 @@ class PrivateRoute extends Component {
 
         if(this.state.loggedIn === false){
             return(
-                <div>You have to loggin
-                    {console.log(this.state.loggedIn)}
+                <div>
+                    <h1>You have to <a href="/"> login</a> first</h1>
                 </div>          
             )
         }

@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import { Route, Link } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
-// components
-// import Signup from '../Signup'
-// import LoginForm from '../Login'
-// import Navbar from './components/navbar'
-// import Home from './components/home'
+
 
 class SurveyOption extends Component {
   constructor() {
@@ -52,13 +48,8 @@ class SurveyOption extends Component {
 
   render() {
     return (
-      <div className="Surveyoption">
-
-        <Navbar updateUser ={this.updateUser} loggedIn ={this.state.loggedIn}/>
-        {
-            this.state.loggedIn && 
-            <p>{this.state.username}</p>
-        }
+      <div className="Survey option">
+      <h1> survey</h1>
       </div>
     );
   }

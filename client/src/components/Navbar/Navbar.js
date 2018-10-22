@@ -1,7 +1,5 @@
-import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
-import { Route, Link } from 'react-router-dom'
-import axios from 'axios'
+import React, { Component } from 'react';
+import axios from 'axios';
 
 class Navbar extends Component {
     constructor() {
@@ -33,7 +31,7 @@ class Navbar extends Component {
         return (
             <div>
 
-                <header className="navbar App-header" id="nav-container">
+                {/* <header className="navbar App-header" id="nav-container">
                     <div className="col-4" >
                         {loggedIn ? (
                             <section className="navbar-section">
@@ -49,7 +47,7 @@ class Navbar extends Component {
                             )}
                     </div>
 
-                </header>
+                </header> */}
             </div>
 
         );
