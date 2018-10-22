@@ -16,18 +16,10 @@ class Signup extends Component {
 		}
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
-	}
-	handleChange(event) {
-		this.setState({
-			[event.target.name]: event.target.value
-		})
-	}
-	handleSubmit(event) {
-		console.log('sign-up handleSubmit, username: ')
-		console.log(this.state.username)
-		event.preventDefault()
+	};
 
-		//request to server to add a new username/password
+	// save a new user/admin to database
+	savedAdmin = () =>{
 		API.saveAdmin({
 			firstname: this.state.firstname,
 			lastname: this.state.lastname,
@@ -39,7 +31,18 @@ class Signup extends Component {
 				console.log(response)
 				if (!response.data.errmsg) {
 					console.log('successful signup')
-					window.location= "/"
+					// clear the state
+					this.setState({
+						firstname: '',
+						lastname: '',
+						email:'',
+						username: '',
+						password: '',
+						modal:false
+					});
+					console.log(this.state);
+					// send user/admin to login page
+					// window.location.href ="/"
 				} else {
 					console.log('username already taken')
 				}
@@ -47,8 +50,19 @@ class Signup extends Component {
 				console.log('signup error: ')
 				console.log(error)
 
-			})
-	}
+			});
+	};
+
+	handleChange = (event) => {
+		this.setState({
+			[event.target.name]: event.target.value
+		});
+	};
+
+	handleSubmit = (event) => {
+		event.preventDefault();
+		this.savedAdmin();
+	};
 
 
 render() {

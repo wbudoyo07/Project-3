@@ -24,6 +24,10 @@ const adminSchema = new Schema ({
     email: {
         type: String,
         require: false
+    },
+    date: {
+        type:Date,
+        default: Date.now
     }
 });
 
