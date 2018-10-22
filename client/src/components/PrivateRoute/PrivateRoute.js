@@ -24,11 +24,14 @@ class PrivateRoute extends Component {
                     loggedIn:true
                 });
             }
+        }).catch(error => {
+            console("Error  on check authentication ")
+            console.log(error);
         });
     };
 
     render(){
-        
+
         if(this.state.loggedIn === false){
             return(
                 <div>You have to loggin
