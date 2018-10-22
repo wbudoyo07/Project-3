@@ -1,3 +1,4 @@
+require('dotenv').config()
 const router = require("express").Router();
 const accountSid = process.env.ACCOUNT_SID;
 const authToken =  process.env.AUTH_TOKEN;
