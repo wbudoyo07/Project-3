@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Form, FormGroup,Label, Input, Button } from "reactstrap";
+import { Container, Row, Col, 
+		Form, FormGroup,Label, Input, Button, 
+		Modal, ModalBody} from "reactstrap";
 import API from "../../utils/API";
 import  "./SignUp.css";
 
@@ -14,8 +16,9 @@ class Signup extends Component {
 			password: '',
 			modal:false
 		}
-		this.handleSubmit = this.handleSubmit.bind(this)
-		this.handleChange = this.handleChange.bind(this)
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.toggle = this.toggle.bind(this);
 	};
 
 	// save a new user/admin to database
@@ -31,6 +34,7 @@ class Signup extends Component {
 				console.log(response)
 				if (!response.data.errmsg) {
 					console.log('successful signup')
+					window.location.href= "/";
 					// clear the state
 					this.setState({
 						firstname: '',
@@ -51,7 +55,13 @@ class Signup extends Component {
 				console.log(error)
 
 			});
-	};
+	}
+
+	toggle() {
+		this.setState({
+		  modal: !this.state.modal
+		});
+	  }
 
 	handleChange = (event) => {
 		this.setState({
@@ -61,7 +71,14 @@ class Signup extends Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		this.savedAdmin();
+		// check the the user fill out all information
+		if(this.state.firstname && this.state.lastname && this.state.username && this.state.email && this.state.password) {
+			this.savedAdmin();
+		}
+		else {
+			this.toggle();
+		}
+		
 	};
 
 
@@ -128,12 +145,20 @@ render() {
 						</FormGroup>
 						<FormGroup>
 							<Button
-							outline color ="info"
+							 outline color ="info"
 							 type ="submit"
 							 onClick = {this.handleSubmit}
 							>
 								Sign Up
 							</Button>
+							<Modal
+							 isOpen = {this.state.modal }
+							 toggle = {this.toggle}
+							 >
+							<ModalBody>
+								Please Fill out all informations
+							</ModalBody>
+							</Modal>
 						</FormGroup>
 					</Form>
 				</Col>

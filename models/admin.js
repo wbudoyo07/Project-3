@@ -7,23 +7,23 @@ mongoose.promise = Promise
 const adminSchema = new Schema ({
     firstname :{
         type: String,
-        required: false
+        required: true
     },
     lastname: {
         type: String,
-        require: false
+        require: true
     },
     username: {
         type: String,
-        require: false
+        require: true
     },
     password: {
         type: String,
-        require: false
+        require: true
     },
     email: {
         type: String,
-        require: false
+        require: true
     },
     date: {
         type:Date,
