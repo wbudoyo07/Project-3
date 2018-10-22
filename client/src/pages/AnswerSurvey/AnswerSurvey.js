@@ -4,6 +4,37 @@ import { Col, Row, Container } from "../../components/Grid";
 import Jumbotron from "../../components/Jumbotron";
 import { List, ListItem } from "../../components/List";
 import API from "../../utils/API";
+import React, {Component} from 'react';
+import {render} from 'react-dom';
+import {
+  SortableContainer,
+  SortableElement,
+  SortableHandle,
+  arrayMove,
+} from 'react-sortable-hoc';
+
+
+const DragHandle = SortableHandle(() => <span>::</span>); // This can be any component you want
+
+const SortableItem = SortableElement(({value}) => {
+  return (
+    <li>
+      <DragHandle />
+      {value}
+    </li>
+  );
+});
+
+const SortableList = SortableContainer(({items}) => {
+  return (
+    <ul>
+      {items.map((value, index) => (
+        <SortableItem key={`item-${index}`} index={index} value={value} />
+      ))}
+    </ul>
+  );
+});
+
 
 class AnswerSurvey extends Component {
 
@@ -36,8 +67,26 @@ class AnswerSurvey extends Component {
         .then(res =>
           this.setState({ items: res.data, title: ""})
         )
+
+        .then(onSortEnd = ({oldIndex, newIndex}) => {
+            const {items} = this.state;
+            this.setState({
+              items: arrayMove(items, oldIndex, newIndex),
+            });
+          };)
         .catch(err => console.log(err));
     };
+
+
+    onSortEnd = ({oldIndex, newIndex}) => {
+        const {items} = this.state;
+        
+        
+    
+        this.setState({
+          items: arrayMove(items, oldIndex, newIndex),
+        });
+      };
 
       render() {
         return (
