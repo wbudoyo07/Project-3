@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import { Route, Link } from 'react-router-dom'
-import Navbar from '../../components/Navbar'
-
+import Nav from "../../components/Navbar";
+import API from "../../utils/API";
 
 class SurveyOption extends Component {
   constructor() {
@@ -26,7 +24,7 @@ class SurveyOption extends Component {
   }
 
   getUser() {
-    axios.get('/api/admin/login').then(response => {
+    API.loginData().then(response => {
       console.log('Get user response: ')
       console.log(response.data)
       if (response.data.userLoggedin) {
@@ -48,9 +46,7 @@ class SurveyOption extends Component {
 
   render() {
     return (
-      <div className="Survey option">
-      <h1> survey</h1>
-      </div>
+      <Nav />
     );
   }
 }
