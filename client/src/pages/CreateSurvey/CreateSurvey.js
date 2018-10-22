@@ -53,6 +53,7 @@ class CreateSurvey extends Component {
         if (this.state.title
           // && this.state.author
           ) {
+            console.log(this.state.recipient);
           this.sendText();
           API.saveItem({
             title: this.state.title,
