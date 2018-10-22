@@ -8,6 +8,7 @@ import PreviousSurvey from "./pages/PreviousSurvey";
 import SignUp from "./pages/Signup";
 import SurveyOption from "./pages/SurveyOption";
 import VoteResults from "./pages/VoteResults";
+import NoMatch from "./pages/NoMatch";
 
 const App = () => (
   <Router>
@@ -23,6 +24,7 @@ const App = () => (
         <Route exact path="/previousSurvey" component={PreviousSurvey} />
         <Route exact path="/AnswerSurvey" component={AnswerSurvey} />
         <Route exact path="/VoteResults" component={VoteResults} />
+        <Route component= {NoMatch}/>
       </Switch>
     </div>
   </Router>
