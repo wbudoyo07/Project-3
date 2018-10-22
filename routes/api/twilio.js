@@ -1,6 +1,7 @@
+require('dotenv').config()
 const router = require("express").Router();
-const accountSid = 'AC7a1f584b516e2253227327b3acacddc1';
-const authToken = '24fc1bfc0989888a257c39e82b5c1cce';
+const accountSid = process.env.ACCOUNT_SID;
+const authToken =  process.env.AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 
 // Matches with "/api/twilio/sendText"
@@ -13,7 +14,7 @@ router.get('/sendText', (req, res) => {
     client.messages.create({
      body: textMessage,
      to: recipient,
-     from: '+16103645619',// number we get from twilio
+     from: '+12156080478',// number we get from twilio
    })
    .then((message => {
        console.log(message.body);

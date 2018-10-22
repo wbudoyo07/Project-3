@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
-import API from "../../utils/API"
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import { Container, Row, Col, 
+         Form, FormGroup,Label, Input, Button, 
+         Modal, ModalBody} from "reactstrap";
+import API from "../../utils/API";
 
 class LoginForm extends Component {
     constructor() {
@@ -30,29 +33,15 @@ class LoginForm extends Component {
                 password: this.state.password
             })
             .then(response => {
-                                //    // update the state to redirect to surveyoption
-                                   this.setState({
-                                    loggedIn: true,
-                                    redirectTo: '/surveyoptions'
-                                })
-            //     console.log('login response: ')
-            //     console.log(response)
-            //     if (response.status === 200) {
-            //         // update App.js state
-            //         this.props.updateUser({
-            //             loggedIn: true,
-            //             username: response.data.username
-            //         })
-            //         // update the state to redirect to home
-            //         this.setState({
-            //             redirectTo: '/surveyoptions'
-            //         })
-            //     }
-            // }).catch(error => {
-            //     console.log('login error: ')
-            //     console.log(error);
-                
-            })
+                // update the state to redirect to surveyoption
+                this.setState({
+                loggedIn: true,
+                redirectTo: '/surveyoptions'
+              }) 
+               }).catch(error => {
+                  console.log('login error: ')
+                  console.log(error);
+                });
     }
 
     render() {
@@ -60,51 +49,49 @@ class LoginForm extends Component {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
         } else {
             return (
-                <div>
-                    <h4>Login</h4>
-                    <form className="form-horizontal">
-                        <div className="form-group">
-                            <div className="col-1 col-ml-auto">
-                                <label className="form-label" htmlFor="username">Username</label>
-                            </div>
-                            <div className="col-3 col-mr-auto">
-                                <input className="form-input"
+                <Container>
+                    <Row>
+                        <Col>
+                        <Form>
+                            <FormGroup>
+                                <Label for ="username">Username</Label>
+                                <Input
                                     type="text"
                                     id="username"
                                     name="username"
                                     placeholder="Username"
                                     value={this.state.username}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <div className="col-1 col-ml-auto">
-                                <label className="form-label" htmlFor="password">Password: </label>
-                            </div>
-                            <div className="col-3 col-mr-auto">
-                                <input className="form-input"
+                                    onChange={this.handleChange}                              
+                                >
+                                </Input>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for = "password">Password</Label>
+                                <Input
                                     placeholder="password"
                                     type="password"
                                     name="password"
                                     value={this.state.password}
                                     onChange={this.handleChange}
-                                />
-                            </div>
-                        </div>
-                        <div className="form-group ">
-                            <div className="col-7"></div>
-                            <button
-                                className="btn btn-primary col-1 col-mr-auto"
-                               
+                                >
+                                </Input>
+                            </FormGroup>
+                            <FormGroup>
+                                <Button
+                                outline color ="info"
+                                type="submit"
                                 onClick={this.handleSubmit}
-                                type="submit">Login</button>
-                        </div>
-                    </form>
-                </div>
-            )
-        }
-    }
-}
+                                >
+                                Login
+                                </Button>
+                            </FormGroup>
+                        </Form>
+                        </Col>
+                    </Row>
+                </Container>
+            );
+        };
+    };
+};
 
 export default LoginForm
