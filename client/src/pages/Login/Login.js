@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { Container, Row, Col, 
          Form, FormGroup,Label, Input, Button, 
          Modal, ModalBody} from "reactstrap";
@@ -84,6 +84,8 @@ class LoginForm extends Component {
                                 >
                                 Login
                                 </Button>
+                                <Link to ="signup"> Sign Up</Link>
+                                
                             </FormGroup>
                         </Form>
                         </Col>

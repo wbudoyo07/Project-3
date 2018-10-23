@@ -1,55 +1,54 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { Nav, NavItem, NavLink } from 'reactstrap';
+import "./Navbar.css"
+import API from "../../utils/API";
 
 class Navbar extends Component {
-    constructor() {
-        super()
-        this.logout = this.logout.bind(this)
+
+    state = {
+        username:"",
+        email: ""
     }
 
+    componentDidMount() {
+        this.getAdmin();
+    }
+    // log out the authentication admin/user
     logout(event) {
         event.preventDefault()
         console.log('logging out')
-        axios.post('/api/admin/logout').then(response => {
-          console.log(response.data)
-          if (response.status === 200) {
-            this.props.updateUser({
-              loggedIn: false,
-              username: null
-            })
-          }
+        API.logOut().then(response => {
+            console.log(response);
+            window.location.href= "/"
         }).catch(error => {
             console.log('Logout error')
         })
       }
+      
+      // get all the data from user authentication
+      getAdmin() {
+          API.loginData().then(response =>{
+            //   console.log(response.data.userLoggedin.username);
+              this.setState({
+                  username: response.data.userLoggedin.username,
+                  email :response.data.userLoggedin.email
+              })
+          })
+      }
 
-    render() {
-        const loggedIn = this.props.loggedIn;
-        console.log('navbar render, props: ')
-        console.log(this.props);
-        
+    render() {   
         return (
-            <div>
-
-                {/* <header className="navbar App-header" id="nav-container">
-                    <div className="col-4" >
-                        {loggedIn ? (
-                            <section className="navbar-section">
-                                <Link to="#" className="btn btn-link text-secondary" onClick={this.logout}>
-                                <span className="text-secondary">logout</span></Link>
-
-                            </section>
-                        ) : (
-                            <div>
-                                Please log in first!!
-                                <a href ="/"> Login</a>
-                             </div>
-                            )}
-                    </div>
-
-                </header> */}
-            </div>
-
+            <Nav className ="Nav">
+                <NavItem>
+                    <NavLink href="/" onClick ={this.logout} >Logout</NavLink>
+                </NavItem>
+                <NavItem>
+                     <NavLink >{this.state.username}</NavLink>
+                </NavItem>
+                <NavItem>
+                     <NavLink >{this.state.email}</NavLink>
+                </NavItem>
+            </Nav>
         );
 
     }

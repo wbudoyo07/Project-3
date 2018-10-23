@@ -18,10 +18,6 @@ export default {
     return axios.post("/api/admin",adminData);
   },
 
-  // Authenticates  the existed user in the DB
-  loginIn: function(loginData) {
-    return axios.post("/api/admin/login", loginData);
-  }, 
   // Gets all Items
   getItems: function() {
     return axios.get("/api/items");
@@ -42,5 +38,21 @@ export default {
   //Twilio send message
   sendText : function() {
     return axios.get("/api/twilio/sendText");
-  }
+  },
+
+  // Authenticates  the existed user in the DB
+  loginIn: function(loginData) {
+    return axios.post("/api/admin/login", loginData);
+  }, 
+
+  logOut: function() {
+    return axios.post("/api/admin/logout");
+  },
+   // get all datas  form the authentication 
+  loginData : function() {
+    return axios.get('/api/admin/login');
+  },
+
+  
+
 };
