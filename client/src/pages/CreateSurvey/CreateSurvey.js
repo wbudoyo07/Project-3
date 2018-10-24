@@ -12,7 +12,8 @@ class CreateSurvey extends Component {
 
     state = {
         items: [],
-        id: "",
+        adminId: "",
+        messageId:"",
         mood: "",
         topic: "",
         response: "",
@@ -25,7 +26,8 @@ class CreateSurvey extends Component {
       componentDidMount() {
         this.loadItems();
       }
-    
+      
+      
       loadItems = () => {
         API.getItems()
           .then(res =>
@@ -66,7 +68,17 @@ class CreateSurvey extends Component {
             topic: this.state.topic,
             // details: this.state.details
           })
-            .then(res => this.loadItems())
+            .then(res => {
+              // grab the id on the latest array.
+              // console.log(res.data.message.slice(-1));
+              this.setState({
+                messageId: res.data.message.slice(-1)
+              });
+
+              this.loadItems()
+            }
+           
+              )
             .catch(err => console.log(err));
         }
       };
