@@ -28,7 +28,15 @@ const adminSchema = new Schema ({
     date: {
         type:Date,
         default: Date.now
-    }
+    },
+    //Join collections
+    message: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Item"
+        }
+    ]
+    
 });
 
 // Define schema methods
