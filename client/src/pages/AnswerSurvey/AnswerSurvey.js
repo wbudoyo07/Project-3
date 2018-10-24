@@ -60,8 +60,8 @@ class AnswerSurvey extends Component {
           console.log(this.state.recipient);
         this.sendText();
         API.saveItem({
-          title: this.state.mood,
-           ballotName: this.state.topic,
+          mood: this.state.mood,
+           topic: this.state.topic,
           // details: this.state.details
         })
           .then(res => this.loadItems())
@@ -81,11 +81,12 @@ class AnswerSurvey extends Component {
       render() {
         return (
           <Container fluid>
+            <Col size="md-12">
             <Row>
-              <Col size="md-12">
+              
               <Jumbotron>
               <h1>Cheer Up</h1>
-                </Jumbotron>
+                </Jumbotron></Row><Row>
                   {this.state.items.length ? (
                     <List>
                     {this.state.items.map(item => (
@@ -99,9 +100,10 @@ class AnswerSurvey extends Component {
                           </ListItem>
                           ))}
                         </List>
-
-                      ) : (
-                        <form>
+                      ) : (<h1></h1>
+                      )}
+         </Row>
+         <form>
                         <TextArea
                                             value={this.state.response}
                                             onChange={this.handleInputChange}
@@ -116,124 +118,10 @@ class AnswerSurvey extends Component {
                         Send a smile
                         </FormBtn>
                         </form>
-           )}
-         </Col>
-       </Row>
+       </Col>
      </Container>
         );
       }
     }
     
 export default AnswerSurvey;
-
-
-
-
-
-// import React, { Component } from "react";
-// import { Link } from "react-router-dom";
-// import { Col, Row, Container } from "../../components/Grid";
-// import Jumbotron from "../../components/Jumbotron";
-// import { List, ListItem } from "../../components/List";
-// import API from "../../utils/API";
-
-// class AnswerSurvey extends Component {
-
-//     // state = {
-//     //     item: {}
-//     //   };
-//     //   // When this component mounts, grab the item with the _id of this.props.match.params.id
-//     //   // e.g. localhost:3000/items/599dcb67f0f16317844583fc
-//     //   componentDidMount() {
-//     //     API.getItem(this.props.match.params.id)
-//     //       .then(res => this.setState({ item: res.data }))
-//     //       .catch(err => console.log(err));
-//     //   }
-    
-//     constructor() {
-//       super();
-//       this.state = {
-//         items: [],
-//         title: ""
-//         // ,
-//         // author: "",
-//         // details: ""
-//       };
-//     }
-//     // state = {
-//     //   items: [],
-//     //   title: ""
-//     //   // ,
-//     //   // author: "",
-//     //   // details: ""
-//     // };
-  
-//     // componentDidMount() {
-//     //   fetch(API.getItems())
-//     //   .then.loadItems(res =>
-//     //     this.setState({ items: res.data, title: ""}));
-//     //   .then.onSortEnd(({oldIndex, newIndex})=>{
-//     //         this.setState({
-//     //         items: arrayMove(this.state.items, oldIndex, newIndex),
-//     //        })
-//     // }
-  
-//     // loadItems = () => {
-//     //   API.getItems()
-//     //     .then(res =>
-//     //       this.setState({ items: res.data, title: ""})
-//     //     )
-//     //     .catch(err => console.log(err));
-//     // };
-
-
-
-//       render() {
-//         return (
-//           <Container fluid>
-//             <Row>
-//               <Col size="md-12">
-//               <Jumbotron>
-//               <h1>Current Options</h1>
-//                 </Jumbotron>
-//                   {this.state.items.length ? (
-//                     <List>
-//                     {this.state.items.map(item => (
-//                           <ListItem key={item._id}>
-//                         <Link to={"/items/" + item._id}>
-//                         <strong>
-//                             {item.title} 
-//                           {/* by {item.author */}
-//                              }
-//                          </strong>
-//                             </Link>
-//                           </ListItem>
-//                           ))}
-//                         </List>
-//                       ) : (
-//              <h3>Current Options</h3>
-//            )}
-//          </Col>
-//        </Row>
-//      </Container>
-//         );
-//       }
-//     }
-    
-// export default AnswerSurvey;
-
-
-
-// // class SortableComponent extends Component {
-// //   state = {
-// //     items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6'],
-// //   };
-// //   onSortEnd = ({oldIndex, newIndex}) => {
-// //     this.setState({
-// //       items: arrayMove(this.state.items, oldIndex, newIndex),
-// //     });
-// //   };
-// //   render() {
-// //     return <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />;
-// //   }
-// // }
