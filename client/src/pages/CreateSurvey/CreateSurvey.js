@@ -5,13 +5,17 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
-import { Input, TextArea, FormBtn } from "../../components/Form";
+import { Input, TextArea, InputInfo, FormBtn } from "../../components/Form";
 import axios from "axios";
+
 class CreateSurvey extends Component {
 
     state = {
         items: [],
-        title: "",
+        id: "",
+        mood: "",
+        topic: "",
+        response: "",
         recipient: ""
         // ,
         // author: "",
@@ -25,7 +29,7 @@ class CreateSurvey extends Component {
       loadItems = () => {
         API.getItems()
           .then(res =>
-            this.setState({ items: res.data, title: ""})
+            this.setState({ items: res.data, mood: "", topic: "", response: ""})
           )
           .catch(err => console.log(err));
       };
@@ -50,14 +54,14 @@ class CreateSurvey extends Component {
       };
       handleFormSubmit = event => {
         event.preventDefault();
-        if (this.state.title
-          // && this.state.author
+        if (this.state.mood
+            && this.state.topic
           ) {
             console.log(this.state.recipient);
           this.sendText();
           API.saveItem({
-            title: this.state.title,
-            // author: this.state.author,
+            mood: this.state.mood,
+            topic: this.state.topic,
             // details: this.state.details
           })
             .then(res => this.loadItems())
@@ -71,20 +75,26 @@ class CreateSurvey extends Component {
             <Row>
               <Col size="md-6">
                 <Jumbotron>
-                  <h1>Make a ballot</h1>
+                  <h1>Insecurity?</h1>
                 </Jumbotron>
                 <form>
-                  <Input
-                    value={this.state.title}
+                    <Input
+                    value={this.state.mood}
                     onChange={this.handleInputChange}
-                    name="title"
-                    placeholder="Item Title (required)"
+                    name="mood"
+                    placeholder="Mood (required)"
                   />
                   <Input
+                    value={this.state.topic}
+                    onChange={this.handleInputChange}
+                    name="topic"
+                    placeholder="I'm insecure about..."
+                  />
+                    <InputInfo
                     value={this.state.recipient}
                     onChange={this.handleInputChange}
                     name="recipient"
-                    placeholder="Phone Number"
+                    placeholder="Phone Number of a fiend"
                   />
                   {/* <Input
                     value={this.state.author}
@@ -100,37 +110,50 @@ class CreateSurvey extends Component {
                   /> */}
                   <FormBtn
                     disabled={!(
-                      // this.state.author && 
-                      this.state.title)}
+                      this.state.mood && 
+                      this.state.topic)}
                     onClick={this.handleFormSubmit}
                   >
-                    Submit
+                    Ask for the pick me up
                   </FormBtn>
                 </form>
+                {/* <form>
+                  <InputInfo
+                    value={this.state.ballotName}
+                    onChange={this.handleInputChange}
+                    name="ballotName"
+                    placeholder="Survey Topic"
+                  />
+                  <FormBtn
+                    disabled={!(
+                       this.state.ballotName && 
+                      this.state.recipient)}
+                    onClick={this.handleFormSubmit}
+                  >
+                    Submit Topic
+                  </FormBtn>
+                  </form>
+                  <form>
+                  <InputInfo
+                    value={this.state.recipient}
+                    onChange={this.handleInputChange}
+                    name="recipient"
+                    placeholder="Phone Number"
+                  />
+                  <FormBtn
+                    disabled={!(
+                       this.state.ballotName && 
+                      this.state.recipient)}
+                    onClick={this.handleFormSubmit}
+                  >
+                    Submit Phone #
+                  </FormBtn>
+
+                </form> */}
               </Col>
-              <Col size="md-6 sm-12">
-                <Jumbotron>
-                  <h1>Current Options</h1>
-                </Jumbotron>
-                {this.state.items.length ? (
-                  <List>
-                    {this.state.items.map(item => (
-                      <ListItem key={item._id}>
-                        <Link to={"/items/" + item._id}>
-                          <strong>
-                            {item.title} 
-                            {/* by {item.author */}
-                            }
-                          </strong>
-                        </Link>
-                        <DeleteBtn onClick={() => this.deleteItem(item._id)} />
-                      </ListItem>
-                    ))}
-                  </List>
-                ) : (
-                  <h3>Current Options</h3>
-                )}
-              </Col>
+              
+              
+
             </Row>
           </Container>
         );

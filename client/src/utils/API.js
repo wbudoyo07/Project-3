@@ -21,7 +21,7 @@ export default {
   // Gets all Items
   getItems: function() {
     return axios.get("/api/items");
-  },
+  }
   // Gets the Item with the given id
   getItem: function(id) {
     return axios.get("/api/items/" + id);
