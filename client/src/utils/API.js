@@ -22,9 +22,7 @@ export default {
   loginIn: function(loginData) {
     return axios.post("/api/admin/login", loginData);
   }, 
-  getLoginIn: function() {
-    return axios.get("/api/admin/login");
-  }, 
+  
   // Gets all Items
   getItems: function() {
     return axios.get("/api/items");
