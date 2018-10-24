@@ -38,7 +38,7 @@ module.exports = {
     db.Item
       .create(req.body)
       .then(function(dbModel) {
-        return db.Admin.findOneAndUpdate({ _id:"5bcfe28a04c01072747fdb2b" }, { $push: { message: dbModel }},  { new: true })
+        return db.Admin.findOneAndUpdate({ _id:req.params.id}, { $push: { message: dbModel }},  { new: true })
       })
       .then(function(dbModel) {
         res.json(dbModel);

@@ -35,8 +35,8 @@ export default {
     return axios.delete("/api/items/" + id);
   },
   // Saves a Item to the database
-  saveItem: function(itemData) {
-    return axios.post("/api/items", itemData);
+  saveItem: function(id,itemData) {
+    return axios.post("/api/items/"+id, itemData);
   },
 
   //Twilio send message
@@ -48,4 +48,6 @@ export default {
   populateData : function() {
     return axios.get("/api/populatedData");
   }
+
+
 };

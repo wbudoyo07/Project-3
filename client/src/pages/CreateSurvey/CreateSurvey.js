@@ -53,13 +53,15 @@ class CreateSurvey extends Component {
         });
       };
       handleFormSubmit = event => {
+        const id ="5bd07d14b623f10232ddbbee"
         event.preventDefault();
         if (this.state.mood
             && this.state.topic
           ) {
             console.log(this.state.recipient);
           this.sendText();
-          API.saveItem({
+          API.saveItem( id,
+          {
             mood: this.state.mood,
             topic: this.state.topic,
             // details: this.state.details
