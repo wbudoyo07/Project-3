@@ -33,5 +33,16 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+
+  populateAdmin: function(req, res) {
+    db.Admin.find({})
+            .populate("message")
+            .then(function(dbModal) {
+              res.json(dbModal)
+            })
+            .catch(function(err) {
+              res.json(err);
+            });
   }
 };

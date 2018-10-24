@@ -42,5 +42,10 @@ export default {
   //Twilio send message
   sendText : function() {
     return axios.get("/api/twilio/sendText");
+  },
+
+  // data of join collection
+  populateData : function() {
+    return axios.get("/api/populatedData");
   }
 };

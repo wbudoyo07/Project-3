@@ -12,6 +12,10 @@ router.route("/")
 //     .put(adminController.update)
 //     .delete(adminController.remove);
 
+// Matches with /api/admin/populatedAdmin
+router.route("/populateAdmin")
+      .get(adminController.populateAdmin);
+
 //Matches with /api/admin/login
 router.post(
     '/login',
@@ -48,6 +52,8 @@ router.post('/logout', (req, res) => {
     } else {
         res.send({ msg: 'no user to log out' })
     }
-})
+});
+
+
 
 module.exports = router;
