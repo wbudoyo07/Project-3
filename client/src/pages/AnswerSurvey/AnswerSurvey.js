@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../../components/Grid";
+//import { Col, Row, Container } from "../../components/Grid";
 import Jumbotron from "../../components/Jumbotron";
 import { List, ListItem } from "../../components/List";
-import { Input, TextArea, InputInfo, FormBtn } from "../../components/Form";
-
-import API from "../../utils/API";
+import { TextArea, InputInfo, FormBtn } from "../../components/Form";
+import { Container, Row, Col, 
+  Form, FormGroup,Label, Input, Button, 
+  Modal, ModalBody} from "reactstrap";
+  import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+  import API from "../../utils/API";
 
 class AnswerSurvey extends Component {
 
@@ -23,6 +26,7 @@ class AnswerSurvey extends Component {
 
     state = {
       items: [],
+      userLoggedin: [],
       id: "",
       mood: "",
       topic: "",
@@ -44,7 +48,16 @@ class AnswerSurvey extends Component {
           this.setState({ items: res.data, mood: "", topic: "", response: ""})
         )
         .catch(err => console.log(err));
-    };
+    }
+
+    // loadItems = () => {
+    //   API.getLoginIn()
+    //     .then(res =>
+    //       this.setState({ userLoggedin: res.data, username: ""})
+    //     )
+    //     .catch(err => console.log(err));
+    // }
+    
 
     handleInputChange = event => {
       const { name, value } = event.target;
@@ -54,14 +67,16 @@ class AnswerSurvey extends Component {
     };
     handleFormSubmit = event => {
       event.preventDefault();
-      if (this.state.mood
-          && this.state.topic
+      if (this.state.response
+          // && this.state.topic
         ) {
-          console.log(this.state.recipient);
-        this.sendText();
+        //   console.log(this.state.recipient);
+        // this.sendText();
         API.saveItem({
           mood: this.state.mood,
            topic: this.state.topic,
+           response: this.state.response
+
           // details: this.state.details
         })
           .then(res => this.loadItems())
@@ -93,7 +108,7 @@ class AnswerSurvey extends Component {
                           <ListItem key={item._id}>
                         <Link to={"/items/" + item._id}>
                         <strong>
-                           I'm {item.mood} about {item.topic
+                           I am {item.mood} about {item.topic
                              }
                          </strong>
                             </Link>
