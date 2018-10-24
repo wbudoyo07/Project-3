@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import axios from "axios";
 class PrivateRoute extends Component {
     state ={
-        loggedIn : false
+        loggedIn :false
     }
 
     componentDidMount(){
@@ -35,7 +35,7 @@ class PrivateRoute extends Component {
         if(this.state.loggedIn === false){
             return(
                 <div>
-                    <h1>You have to <a href="/"> login</a> first</h1>
+                    {/* <h1>You have to <a href="/"> login</a> first</h1> */}
                 </div>          
             )
         }
