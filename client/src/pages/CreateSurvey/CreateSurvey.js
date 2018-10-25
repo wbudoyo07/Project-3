@@ -46,7 +46,7 @@ class CreateSurvey extends Component {
     };
     // send message to twilio routes
     sendText = ()=> {
-      axios.get(`/api/twilio/sendText?recipient=+1${this.state.recipient}&textMessage=localhost/3000/${this.state.messsageId}`)
+      axios.get(`/api/twilio/sendText?recipient=+1${this.state.recipient}&textMessage=https://nworf.herokuapp.com/${this.state.messsageId}`)
       .catch(err =>  console.log(err));
       }
 
