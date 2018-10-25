@@ -3,7 +3,9 @@ import { Redirect, Link } from 'react-router-dom';
 import { Container, Row, Col, 
          Form, FormGroup,Label, Input, Button, 
          Modal, ModalBody} from "reactstrap";
-import API from "../../utils/API";
+import Skills from "../../components/Skills"
+         import API from "../../utils/API";
+import Jumbotron from '../../components/Jumbotron';
 
 class LoginForm extends Component {
     constructor() {
@@ -52,6 +54,16 @@ class LoginForm extends Component {
                 <Container>
                     <Row>
                         <Col>
+                        {/* <Skills /> */}
+                        <Jumbotron>
+                            <div className="display-1">NWORF</div>
+                        <div className="nworf" style={{backgroundColor: "#007BA7"}}>
+      <div className="wow flip animated infinite" data-wow-duration="4s" animation-iteration-count= "infinite" >
+       <h4 > NWORF  ИWOЯꟻ  FROWN  NWORF</h4></div>
+      </div>
+                                          <h4>🙃Turn that frown upside down.🙃</h4>
+                                          
+                                          </Jumbotron> 
                         <Form>
                             <FormGroup>
                                 <Label for ="username">Username</Label>
