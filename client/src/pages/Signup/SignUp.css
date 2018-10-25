@@ -1,6 +1,18 @@
 .sign-up-container {
+   
     border: 1px solid black;
-    background: #007BA7;
+    background-image: url("https://images.pexels.com/photos/34090/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     height: 100%;
+}
+
+.sign-up-col{
+    border-radius: 25px;
+    border: 1px solid #b0b1dd;
+    margin-top: 50px;
+}
+
+.sign-up-col>h1 {
+    text-align: center;
+    margin-top:10px;
 }
 

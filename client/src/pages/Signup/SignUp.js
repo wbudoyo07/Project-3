@@ -89,7 +89,8 @@ render() {
 	return (
 		<Container fluid className="sign-up-container" >
 			<Row>
-				<Col>
+				<Col className="sign-up-col" sm="12" md={{ size: 6, offset: 3 }}>
+					<h1>Sign Up</h1>
 					<Form>
 						<FormGroup>
 							<Label for ="firstname"> First Name</Label>
