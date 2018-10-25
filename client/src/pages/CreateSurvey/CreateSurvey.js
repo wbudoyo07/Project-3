@@ -63,7 +63,7 @@ class CreateSurvey extends Component {
         });
       };
       handleFormSubmit = event => {
-        const id= this.state.userLoginId
+        const id= this.state.userLoginId;
         event.preventDefault();
         if (this.state.mood
             && this.state.topic

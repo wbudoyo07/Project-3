@@ -9,6 +9,7 @@ import { Container, Row, Col,
   Modal, ModalBody} from "reactstrap";
   import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
   import API from "../../utils/API";
+import axios from "axios";
 
 class AnswerSurvey extends Component {
 
@@ -26,12 +27,14 @@ class AnswerSurvey extends Component {
 
     state = {
       items: [],
-      userLoggedin: [],
+      userLoggedIn:"",
       id: "",
       mood: "",
       topic: "",
-      response: "",
+      responseText: "",
+      adminPhonenumber:"",
       recipient: ""
+
       // ,
       // author: "",
       // details: ""
@@ -39,6 +42,10 @@ class AnswerSurvey extends Component {
   
     componentDidMount() {
       // this.loadItems();
+      this.getMessageData();
+      this.getLoginDataPhoneNumber();
+    }
+    getMessageData=()=> {
       API.getItem(this.props.match.params.id)
       .then(res => {
         console.log(res.data);
@@ -46,14 +53,24 @@ class AnswerSurvey extends Component {
           mood: res.data.mood,
           topic: res.data.topic
         })
-      }
-        // this.setState({ book: res.data })
-      
-        )
+      })
       .catch(err => console.log(err));
     }
-  
 
+    getLoginDataPhoneNumber =() => {
+      API.loginData().then(response => {
+        this.setState({
+          adminPhonenumber: response.data.userLoggedin.phonenumber,
+          userLoginId:response.data.userLoggedin._id
+
+        })
+        console.log(this.state);
+      })
+    }
+    sendText= ()=>{
+      axios.get(`/api/twilio/sendText?recipient=+1${this.state.adminPhonenumber}&textMessage=${this.state.responseText}`)
+      .catch(err =>  console.log(err));
+    }
     loadItems = () => {
       API.getItems(this.props.match.params.id)
         .then(res =>{
@@ -79,19 +96,18 @@ class AnswerSurvey extends Component {
       this.setState({
         [name]: value
       });
+      console.log(event.target.value);
     };
     handleFormSubmit = event => {
+      const id = this.state.userLoggedIn;
       event.preventDefault();
       if (this.state.response
           // && this.state.topic
         ) {
         //   console.log(this.state.recipient);
         // this.sendText();
-        API.saveItem({
-          mood: this.state.mood,
-           topic: this.state.topic,
-           response: this.state.response
-
+        API.saveItem( id,{
+           response: this.state.responseText
           // details: this.state.details
         })
           .then(res => this.loadItems())
@@ -136,14 +152,14 @@ class AnswerSurvey extends Component {
          </Row>
          <form>
                         <TextArea
-                                            value={this.state.response}
+                                            value={this.state.responseText}
                                             onChange={this.handleInputChange}
-                                            name="response"
+                                            name="responseText"
                                             placeholder="Pick your friend up"
                                           />
                         <FormBtn
                         disabled={!(
-                          this.state.response )}
+                          this.state.responseText )}
                         onClick={this.handleFormSubmit}
                         >
                         Send a smile
