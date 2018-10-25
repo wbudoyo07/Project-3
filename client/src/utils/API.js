@@ -30,6 +30,9 @@ export default {
   deleteItem: function(id) {
     return axios.delete("/api/items/" + id);
   },
+  saveResponse:function(id,responseData) {
+    return axios.post("/api/items/response"+id, responseData);
+  },
   // Saves a Item to the database
   saveItem: function(id,itemData) {
     return axios.post("/api/items/"+id, itemData);
@@ -54,5 +57,10 @@ export default {
    // get all datas  form the authentication 
   loginData : function() {
     return axios.get('/api/admin/login');
-  }
+  },
+
+ // Saves a response to the database
+ saveResponse: function(id,responseData) {
+  return axios.post("/api/response/"+id, responseData);
+}
 };

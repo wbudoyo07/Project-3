@@ -40,5 +40,16 @@ module.exports = {
       .catch(function(err) {
         res.json(err);
       });
-  }
+  },
+
+  // createResponse : function(req,res) {
+  //   db.Item
+  //     .create(req.body)
+  //     .then(function(dbModel) {
+  //       return db.Item.findOneAndUpdate({_id:req.params.id}, {response:dbModel}, {new:true})
+  //     })
+  //     .then(function(dbModel) {
+  //       res.json(dbModel)
+  //     })
+  // }
 };

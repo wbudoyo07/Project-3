@@ -25,6 +25,10 @@ const adminSchema = new Schema ({
         type: String,
         require: true
     },
+    phonenumber: {
+        type: Number,
+        require: true
+    },
     date: {
         type:Date,
         default: Date.now

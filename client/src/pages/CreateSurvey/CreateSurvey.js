@@ -23,6 +23,7 @@ class CreateSurvey extends Component {
         response: "",
         recipient: "",
         phonenumber:""
+
       };
     
       componentDidMount() {
@@ -76,6 +77,7 @@ class CreateSurvey extends Component {
             mood: this.state.mood,
             topic: this.state.topic,
             phonenumber: this.state.phonenumber
+
           })
             .then(res => {
               // this.loadItems()
@@ -123,10 +125,6 @@ class CreateSurvey extends Component {
          onChange={this.handleInputChange}
          placeholder="life."/>
        </FormGroup>
-
-{/* <FormText color="muted">
-           Enter the phone number of someone who can help change your mood.
-         </FormText> */}
 
          <FormGroup>
          <Label for="recipient"> Enter the phone number of someone who can help change your mood.</Label>
