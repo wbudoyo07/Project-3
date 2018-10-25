@@ -29,7 +29,8 @@ class AnswerSurvey extends Component {
         
         this.setState({
           mood: res.data.mood,
-          topic: res.data.topic
+          topic: res.data.topic,
+          phonenumber: res.data.phonenumber
         })
       }
         // this.setState({ book: res.data })
@@ -37,7 +38,6 @@ class AnswerSurvey extends Component {
         )
       .catch(err => console.log(err));
 
-      this.getLoginData();
     }
   
     // send message to twilio routes
@@ -57,16 +57,7 @@ class AnswerSurvey extends Component {
         .catch(err => console.log(err));
     }
 
-    getLoginData =() => {
-      API.loginData().then(response => {
-        // console.log(response.data.userLoggedin.phonenumber);
-        this.setState({
-          phonenumber:response.data.userLoggedin.phonenumber
-        })
-      });
-    };
     
-
     handleInputChange = event => {
       const { name, value } = event.target;
       this.setState({
