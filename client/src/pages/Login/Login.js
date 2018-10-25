@@ -5,6 +5,7 @@ import { Container, Row, Col,
          Modal, ModalBody} from "reactstrap";
 import API from "../../utils/API";
 import Jumbotron from '../../components/Jumbotron';
+import Skills from "../../components/Skills"
 import "./Login.css";
 import Footer from '../../components/Footer';
 import WOW from "wowjs"
