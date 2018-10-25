@@ -6,21 +6,36 @@ import { List, ListItem } from "../../components/List";
 import { TextArea, InputInfo, FormBtn } from "../../components/Form";
 import { Container, Row, Col, 
   Form, FormGroup,Label, Input, Button, 
-  Modal, ModalBody} from "reactstrap";
+  Modal, ModalBody, ModalFooter} from "reactstrap";
   import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
   import API from "../../utils/API";
   import axios from "axios";
 class AnswerSurvey extends Component {
-    state = {
+  constructor(props) {
+    super(props);
+    this.state = {
       userLoginId:"",
       phonenumber:"",
       mood: "",
       topic: "",
       response: "",
       recipient: "",
-      username:""
+      username:"",
+      modal:false
     };
-  
+    this.toggle = this.toggle.bind(this);
+    this.modalButton = this.modalButton.bind(this);
+  }
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal
+    });
+  };
+
+  modalButton () {
+    window.location.href ="/";
+  };
     componentDidMount() {
       // this.loadItems();
 
@@ -81,6 +96,7 @@ class AnswerSurvey extends Component {
           .then(res => {
             console.log(res);
             this.sendText();
+            this.toggle();
           })
           .catch(err => console.log(err));
       }
@@ -121,6 +137,17 @@ class AnswerSurvey extends Component {
         </Form>
        </Col>
        </Row>
+       <Modal
+               isOpen = {this.state.modal }
+							 toggle = {this.toggle}
+              >
+              <ModalBody>
+                You're such a great friend
+              </ModalBody>
+              <ModalFooter>
+              <Button color="primary" onClick={this.modalButton}>Okay</Button>
+              </ModalFooter>
+              </Modal>
      </Container>
         );
       }
