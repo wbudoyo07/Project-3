@@ -9,21 +9,8 @@ import { Container, Row, Col,
   Modal, ModalBody} from "reactstrap";
   import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
   import API from "../../utils/API";
-
+  import axios from "axios";
 class AnswerSurvey extends Component {
-
-    // state = {
-    //     item: {}
-    //   };
-    //   // When this component mounts, grab the item with the _id of this.props.match.params.id
-    //   // e.g. localhost:3000/items/599dcb67f0f16317844583fc
-    //   componentDidMount() {
-    //     API.getItem(this.props.match.params.id)
-    //       .then(res => this.setState({ item: res.data }))
-    //       .catch(err => console.log(err));
-    //   }
-    
-
     state = {
       userLoginId:"",
       phonenumber:"",
@@ -31,9 +18,6 @@ class AnswerSurvey extends Component {
       topic: "",
       response: "",
       recipient: ""
-      // ,
-      // author: "",
-      // details: ""
     };
   
     componentDidMount() {
@@ -41,7 +25,7 @@ class AnswerSurvey extends Component {
 
       API.getItem(this.props.match.params.id)
       .then(res => {
-        console.log(res.data);
+        console.log(res);
         
         this.setState({
           mood: res.data.mood,
@@ -53,9 +37,14 @@ class AnswerSurvey extends Component {
         )
       .catch(err => console.log(err));
 
-      // this.getLoginData();
+      this.getLoginData();
     }
   
+    // send message to twilio routes
+    sendText = ()=> {
+      axios.get(`/api/twilio/sendText?recipient=+1${this.state.phonenumber}&textMessage=${this.state.response}`)
+      .catch(err =>  console.log(err));
+      }
 
     loadItems = () => {
       API.getItems(this.props.match.params.id)
@@ -70,10 +59,10 @@ class AnswerSurvey extends Component {
 
     getLoginData =() => {
       API.loginData().then(response => {
-        console.log(response);
-        // this.setState({
-        //   userLoginId:response.data.userLoggedin._id
-        // })
+        // console.log(response.data.userLoggedin.phonenumber);
+        this.setState({
+          phonenumber:response.data.userLoggedin.phonenumber
+        })
       });
     };
     
@@ -98,6 +87,7 @@ class AnswerSurvey extends Component {
         })
           .then(res => {
             console.log(res);
+            this.sendText();
           })
           .catch(err => console.log(err));
       }
