@@ -1,29 +1,36 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../components/DeleteBtn";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
 import { Input, TextArea, InputInfo, FormBtn } from "../../components/Form";
+import {ModalBody, Modal, ModalFooter, Container, Row, Col, Button} from "reactstrap";
 import axios from "axios";
 import Navbar from "../../components/Navbar";
 
 class CreateSurvey extends Component {
-
-    state = {
+constructor(props) {
+    super(props);
+    this.state = {
         items: [],
         messsageId: "",
         userLoginId: "",
         mood: "",
         topic: "",
         response: "",
-        recipient: ""
-        // ,
-        // author: "",
-        // details: ""
+        recipient: "",
+        modal:false
       };
-    
+      this.toggle = this.toggle.bind(this);
+      this.modalButton = this.modalButton.bind(this);
+    }; 
+
+    toggle() {
+      this.setState({
+        modal: !this.state.modal
+      });
+    }
+    modalButton () {
+      window.location.href ="/surveyoptions";
+    }
       componentDidMount() {
         this.loadItems();
         this.getLoginData();
@@ -82,6 +89,7 @@ class CreateSurvey extends Component {
                 messsageId:res.data.message.slice(-1)[0]
               });
               this.sendText();
+              this.toggle();
             }
               )
             .catch(err => console.log(err));
@@ -175,6 +183,17 @@ class CreateSurvey extends Component {
               
 
             </Row>
+            <Modal
+							 isOpen = {this.state.modal }
+							 toggle = {this.toggle}
+							 >
+							<ModalBody>
+								Successful sent to {this.state.recipient}
+							</ModalBody>
+              <ModalFooter>
+              <Button color="primary" onClick={this.modalButton}>Okay</Button>
+              </ModalFooter>
+							</Modal>
           </Container>
         );
       }
