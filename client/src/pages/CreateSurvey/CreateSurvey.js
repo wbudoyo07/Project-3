@@ -27,6 +27,7 @@ class CreateSurvey extends Component {
         response: "",
         recipient: "",
         phonenumber:"",
+        username:"",
         modal:false
       }
       this.toggle = this.toggle.bind(this);
@@ -64,7 +65,8 @@ class CreateSurvey extends Component {
       API.loginData().then(response => {
         this.setState({
           userLoginId:response.data.userLoggedin._id,
-          phonenumber:response.data.userLoggedin.phonenumber
+          phonenumber:response.data.userLoggedin.phonenumber,
+          username: response.data.userLoggedin.username
         })
       });
     };
@@ -97,7 +99,8 @@ class CreateSurvey extends Component {
           {
             mood: this.state.mood,
             topic: this.state.topic,
-            phonenumber: this.state.phonenumber
+            phonenumber: this.state.phonenumber,
+            username: this.state.username
 
           })
             .then(res => {
@@ -118,7 +121,7 @@ class CreateSurvey extends Component {
       render() {
         return (
 
-          <Container>
+          <Container fluid>
 
           <Navbar />
           <Row>

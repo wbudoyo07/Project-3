@@ -3,9 +3,9 @@ import { Redirect, Link } from 'react-router-dom';
 import { Container, Row, Col, 
          Form, FormGroup,Label, Input, Button, 
          Modal, ModalBody} from "reactstrap";
-import Skills from "../../components/Skills"
-         import API from "../../utils/API";
+import API from "../../utils/API";
 import Jumbotron from '../../components/Jumbotron';
+import "./Login.css";
 import Footer from '../../components/Footer';
 import WOW from "wowjs"
 
@@ -54,7 +54,7 @@ class LoginForm extends Component {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
         } else {
             return (
-                <Container>
+                <Container fluid className ="login-container">
                     <Row>
                         <Col>
                         {/* <Skills /> */}
