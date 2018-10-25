@@ -121,7 +121,7 @@ class CreateSurvey extends Component {
       render() {
         return (
 
-          <Container>
+          <Container fluid>
 
           <Navbar />
           <Row>

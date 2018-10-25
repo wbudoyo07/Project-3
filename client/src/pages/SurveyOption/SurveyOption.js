@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Nav from "../../components/Navbar";
 import { Container, Row, Col, Button } from 'reactstrap';
+import "./SurveyOption.css";
 
 class SurveyOption extends Component {
 
@@ -11,28 +12,16 @@ class SurveyOption extends Component {
         <Row>
           <Col>
             <Button
+              className="SurveyBtn"
               href="/createsurvey"
               outline color ="info"
               size="lg"
               block
             >
-              Create Survey
+              Send Message
             </Button>
           </Col>
           </Row>
-          <Row>
-          <Col>
-            <Button
-            type ="submit"
-            href="/previoussurvey"
-            outline color ="info"
-            size ="lg"
-            block
-            >
-              Previous Survey
-            </Button>
-          </Col>
-        </Row>
       </Container>
     );
   }

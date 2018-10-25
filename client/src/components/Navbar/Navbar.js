@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import { Nav, NavItem, NavLink, Navbar, } from 'reactstrap';
 import "./Navbar.css"
 import API from "../../utils/API";
 
-class Navbar extends Component {
+class NavbarComponent extends Component {
 
     state = {
         username:"",
@@ -38,22 +38,28 @@ class Navbar extends Component {
 
     render() {   
         return (
-            <Nav className ="Nav">
+            
+            <Navbar className="Navbar" light expand="md">
+                <Nav className ="Nav">
                 <NavItem>
-                    <NavLink href="/" onClick ={this.logout} >Logout</NavLink>
+                        <NavLink href="/aboutus">About us</NavLink>
                 </NavItem>
-                <NavItem>
-                     <NavLink >{this.state.username}</NavLink>
-                </NavItem>
-                <NavItem>
-                     <NavLink >{this.state.email}</NavLink>
-                </NavItem>
-            </Nav>
+                    <NavItem>
+                        <NavLink href="/" onClick ={this.logout} >Logout</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink > username: {this.state.username}</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink > email: {this.state.email}</NavLink>
+                    </NavItem>
+                </Nav>
+            </Navbar>
         );
 
     }
 }
 
-export default Navbar
+export default NavbarComponent;
 
 
