@@ -17,6 +17,7 @@ constructor(props) {
         topic: "",
         response: "",
         recipient: "",
+        phonenumber:"",
         modal:false
       };
       this.toggle = this.toggle.bind(this);
