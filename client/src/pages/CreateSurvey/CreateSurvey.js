@@ -9,12 +9,13 @@ import { List, ListItem } from "../../components/List";
 import axios from "axios";
 import Navbar from "../../components/Navbar";
 import { Col, Row, Container, Button, Form, 
-  FormGroup, Label, Input, FormText, Footer } from 'reactstrap';
+  FormGroup, Label, Input, FormText, Footer, Modal, ModalBody, ModalFooter} from 'reactstrap';
 
 
 class CreateSurvey extends Component {
-
-    state = {
+  constructor(props) {
+    super(props);
+    this.state = {
         items: [],
         messsageId: "",
         userLoginId: "",
@@ -22,10 +23,27 @@ class CreateSurvey extends Component {
         topic: "",
         response: "",
         recipient: "",
-        phonenumber:""
+        phonenumber:"",
+        modal:false
+      }
+      this.toggle = this.toggle.bind(this);
+      this.modalButton = this.modalButton.bind(this);
+    };
+    toggle() {
+      this.setState({
+        modal: !this.state.modal
+      });
+    };
 
-      };
-    
+    modalButton () {
+      window.location.href ="/surveyoptions";
+    };
+
+      componentDidMount() {
+        this.loadItems();
+        this.getLoginData();
+      }
+
       componentDidMount() {
         this.loadItems();
         this.getLoginData();
@@ -87,6 +105,7 @@ class CreateSurvey extends Component {
                 messsageId:res.data.message.slice(-1)[0]
               });
               this.sendText();
+              this.toggle();
             }
               )
             .catch(err => console.log(err));
@@ -149,6 +168,17 @@ class CreateSurvey extends Component {
         
               </Col>
               </Row>
+              <Modal
+               isOpen = {this.state.modal }
+							 toggle = {this.toggle}
+              >
+              <ModalBody>
+                Succesfully sent to {this.state.recipient}
+              </ModalBody>
+              <ModalFooter>
+              <Button color="primary" onClick={this.modalButton}>Okay</Button>
+              </ModalFooter>
+              </Modal>
           </Container >
 
           );
