@@ -18,7 +18,8 @@ class CreateSurvey extends Component {
         mood: "",
         topic: "",
         response: "",
-        recipient: ""
+        recipient: "",
+        phonenumber:""
         // ,
         // author: "",
         // details: ""
@@ -40,7 +41,8 @@ class CreateSurvey extends Component {
     getLoginData =() => {
       API.loginData().then(response => {
         this.setState({
-          userLoginId:response.data.userLoggedin._id
+          userLoginId:response.data.userLoggedin._id,
+          phonenumber:response.data.userLoggedin.phonenumber
         })
       });
     };
@@ -73,11 +75,13 @@ class CreateSurvey extends Component {
           {
             mood: this.state.mood,
             topic: this.state.topic,
+            phonenumber: this.state.phonenumber
             // details: this.state.details
           })
             .then(res => {
               // this.loadItems()
               console.log(res.data.message.slice(-1)[0]);
+            
               this.setState({
                 messsageId:res.data.message.slice(-1)[0]
               });
