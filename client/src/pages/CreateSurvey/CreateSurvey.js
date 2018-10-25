@@ -3,11 +3,14 @@ import DeleteBtn from "../../components/DeleteBtn";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../../components/Grid";
+//import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
-import { Input, TextArea, InputInfo, FormBtn } from "../../components/Form";
+//import { Input, TextArea, InputInfo, FormBtn } from "../../components/Form";
 import axios from "axios";
 import Navbar from "../../components/Navbar";
+import { Col, Row, Container, Button, Form, 
+  FormGroup, Label, Input, FormText, Footer } from 'reactstrap';
+
 
 class CreateSurvey extends Component {
 
@@ -18,10 +21,8 @@ class CreateSurvey extends Component {
         mood: "",
         topic: "",
         response: "",
-        recipient: ""
-        // ,
-        // author: "",
-        // details: ""
+        recipient: "",
+        phonenumber:""
       };
     
       componentDidMount() {
@@ -40,13 +41,14 @@ class CreateSurvey extends Component {
     getLoginData =() => {
       API.loginData().then(response => {
         this.setState({
-          userLoginId:response.data.userLoggedin._id
+          userLoginId:response.data.userLoggedin._id,
+          phonenumber:response.data.userLoggedin.phonenumber
         })
       });
     };
     // send message to twilio routes
     sendText = ()=> {
-      axios.get(`/api/twilio/sendText?recipient=+1${this.state.recipient}&textMessage=www.google.com`)
+      axios.get(`/api/twilio/sendText?recipient=+1${this.state.recipient}&textMessage=https://nworf.herokuapp.com/answersurvey/${this.state.messsageId}`)
       .catch(err =>  console.log(err));
       }
 
@@ -63,114 +65,96 @@ class CreateSurvey extends Component {
         });
       };
       handleFormSubmit = event => {
-        const id= this.state.userLoginId
+        const id= this.state.userLoginId;
         event.preventDefault();
         if (this.state.mood
             && this.state.topic
           ) {
             console.log(this.state.recipient);
-          this.sendText();
           API.saveItem(id,
           {
             mood: this.state.mood,
             topic: this.state.topic,
-            // details: this.state.details
+            phonenumber: this.state.phonenumber
           })
-            .then(res => this.loadItems())
+            .then(res => {
+              // this.loadItems()
+              console.log(res.data.message.slice(-1)[0]);
+            
+              this.setState({
+                messsageId:res.data.message.slice(-1)[0]
+              });
+              this.sendText();
+            }
+              )
             .catch(err => console.log(err));
         }
       };
     
       render() {
         return (
-          <Container fluid>
+
+          <Container>
+
           <Navbar />
-            <Row>
-              <Col size="md-6">
+          <Row>
+              <Col >
+
+              
                 <Jumbotron>
-                  <h1>Insecurity?</h1>
+                  <h1 className="display-1"><strong>NWORF</strong></h1>
+                  <h4>Turn that frown upside down.</h4>
                 </Jumbotron>
-                <form>
-                    <Input
-                    value={this.state.mood}
-                    onChange={this.handleInputChange}
-                    name="mood"
-                    placeholder="Mood (required)"
-                  />
-                  <Input
-                    value={this.state.topic}
-                    onChange={this.handleInputChange}
-                    name="topic"
-                    placeholder="I'm insecure about..."
-                  />
-                    <InputInfo
-                    value={this.state.recipient}
-                    onChange={this.handleInputChange}
-                    name="recipient"
-                    placeholder="Phone Number of a fiend"
-                  />
-                  {/* <Input
-                    value={this.state.author}
-                    onChange={this.handleInputChange}
-                    name="author"
-                    placeholder="Author (required)"
-                  /> */}
-                  {/* <TextArea
-                    value={this.state.details}
-                    onChange={this.handleInputChange}
-                    name="details"
-                    placeholder="Details (Optional)"
-                  /> */}
-                  <FormBtn
-                    disabled={!(
+<Form>
+                <FormGroup>
+         <Label for="mood">I’m feeling</Label>
+         <Input type="textarea"
+         name="mood"
+         value={this.state.mood}
+         onChange={this.handleInputChange}
+         placeholder=" 😣 😥 🙃 😮 🤐 😯 😪 😫 😴 😟 😱 😝 🤤 😒 😓 🤬 😕 🙃 😫 😲 ☹️ 🙁 😖 😞 😟 😤 😢 😯 😦 🙃 😧 😩 🤯 😬 😰 😱 😵 😡 😠 🤬 😷 🤒 🤕 🤢 🤮 🤧 😇 🤭 😌 🙃 😨 😔 😥 🤯" />
+       </FormGroup>
+
+       <FormGroup>
+         <Label for="topic">About....</Label>
+         <Input type="textarea"
+         name="topic"
+         value={this.state.topic}
+         onChange={this.handleInputChange}
+         placeholder="life."/>
+       </FormGroup>
+
+{/* <FormText color="muted">
+           Enter the phone number of someone who can help change your mood.
+         </FormText> */}
+
+         <FormGroup>
+         <Label for="recipient"> Enter the phone number of someone who can help change your mood.</Label>
+         <Input type="text"
+         name="recipient"
+         placeholder="555-867-5309"
+         value={this.state.recipient}
+         onChange={this.handleInputChange}
+         />
+       </FormGroup>
+
+       <FormGroup>
+       <Button disabled={!(
                       this.state.mood && 
                       this.state.topic)}
                     onClick={this.handleFormSubmit}
                   >
-                    Ask for the pick me up
-                  </FormBtn>
-                </form>
-                {/* <form>
-                  <InputInfo
-                    value={this.state.ballotName}
-                    onChange={this.handleInputChange}
-                    name="ballotName"
-                    placeholder="Survey Topic"
-                  />
-                  <FormBtn
-                    disabled={!(
-                       this.state.ballotName && 
-                      this.state.recipient)}
-                    onClick={this.handleFormSubmit}
-                  >
-                    Submit Topic
-                  </FormBtn>
-                  </form>
-                  <form>
-                  <InputInfo
-                    value={this.state.recipient}
-                    onChange={this.handleInputChange}
-                    name="recipient"
-                    placeholder="Phone Number"
-                  />
-                  <FormBtn
-                    disabled={!(
-                       this.state.ballotName && 
-                      this.state.recipient)}
-                    onClick={this.handleFormSubmit}
-                  >
-                    Submit Phone #
-                  </FormBtn>
+            🙁 ⇒ 🙂 </Button>
+          </FormGroup>
 
-                </form> */}
+        </Form>  
+        
               </Col>
-              
-              
+              </Row>
+          </Container >
 
-            </Row>
-          </Container>
-        );
+          );
+        }
       }
-    }
-
+  
 export default CreateSurvey;
