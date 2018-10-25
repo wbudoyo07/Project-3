@@ -6,6 +6,8 @@ import { Container, Row, Col,
 import API from "../../utils/API";
 import Jumbotron from '../../components/Jumbotron';
 import "./Login.css";
+import Footer from '../../components/Footer';
+import WOW from "wowjs"
 
 
 class LoginForm extends Component {
@@ -58,9 +60,7 @@ class LoginForm extends Component {
                         {/* <Skills /> */}
                         <Jumbotron>
                             <div className="display-1">NWORF</div>
-                        <div className="nworf" style={{backgroundColor: "#007BA7"}}>
-      <div className="wow flip animated infinite" data-wow-duration="4s" animation-iteration-count= "infinite" >
-       <h4 > NWORF  ИWOЯꟻ  FROWN  NWORF</h4></div>
+                        <div className="nworf">
       </div>
                                           <h4>🙃Turn that frown upside down.🙃</h4>
                                           
@@ -101,8 +101,10 @@ class LoginForm extends Component {
                                 
                             </FormGroup>
                         </Form>
+                        <Skills />
                         </Col>
-                    </Row>
+                       
+                    </Row> 
                 </Container>
             );
         };

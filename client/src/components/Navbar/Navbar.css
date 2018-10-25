@@ -1,3 +1,11 @@
-.Navbar{
-    background-color:rgb(166, 166, 241);
+
+.Nav {
+
+    width: 100vw;
+	margin: 0 0 1em 0;
+    padding-left: 0;
+    
+    background-color: #93BFFF;
+        border-bottom: 1px solid #ccc;
+    
 }
