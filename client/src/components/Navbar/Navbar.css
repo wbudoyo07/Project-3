@@ -1,3 +1,10 @@
 .Nav {
-    border-bottom: 1px solid black;
+
+    width: 100vw;
+	margin: 0 0 1em 0;
+    padding-left: 0;
+    
+    background-color: #93BFFF;
+        border-bottom: 1px solid #ccc;
+    
 }

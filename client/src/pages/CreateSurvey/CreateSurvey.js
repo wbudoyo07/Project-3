@@ -125,11 +125,11 @@ class CreateSurvey extends Component {
               <Col >
 
               
-                <Jumbotron>
-                  <h1 className="display-1"><strong>NWORF</strong></h1>
-                  <h4>Turn that frown upside down.</h4>
+                {/* <Jumbotron>
+                  <h3 className="display-1"><strong>NWORF</strong></h3>
+                  <h5>Turn that frown upside down.</h5>
                   
-                </Jumbotron>
+                </Jumbotron> */}
                 {/* <Skills /> */}
 <Form>
                 <FormGroup>
