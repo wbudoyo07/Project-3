@@ -5,7 +5,13 @@ const itemSchema = new Schema({
   mood: { type: String, required: true },
   topic: { type: String, required: true },
   response: { type: String, required: false },
-  date: { type: Date, default: Date.now }
+  date: { type: Date, default: Date.now },
+  response:[
+    {
+      type: Schema.Types.ObjectId,
+      ref: "response"
+    }
+]
 });
 
 const Item = mongoose.model("Item", itemSchema);

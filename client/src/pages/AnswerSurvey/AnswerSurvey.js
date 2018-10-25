@@ -9,7 +9,6 @@ import { Container, Row, Col,
   Modal, ModalBody} from "reactstrap";
   import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
   import API from "../../utils/API";
-import axios from "axios";
 
 class AnswerSurvey extends Component {
 
@@ -26,15 +25,12 @@ class AnswerSurvey extends Component {
     
 
     state = {
-      items: [],
-      userLoggedIn:"",
-      id: "",
+      userLoginId:"",
+      phonenumber:"",
       mood: "",
       topic: "",
-      responseText: "",
-      adminPhonenumber:"",
+      response: "",
       recipient: ""
-
       // ,
       // author: "",
       // details: ""
@@ -42,53 +38,44 @@ class AnswerSurvey extends Component {
   
     componentDidMount() {
       // this.loadItems();
-      this.getMessageData();
-      this.getLoginDataPhoneNumber();
-    }
-    getMessageData=()=> {
+
       API.getItem(this.props.match.params.id)
       .then(res => {
         console.log(res.data);
+        
         this.setState({
           mood: res.data.mood,
           topic: res.data.topic
         })
-      })
+      }
+        // this.setState({ book: res.data })
+      
+        )
       .catch(err => console.log(err));
-    }
 
-    getLoginDataPhoneNumber =() => {
-      API.loginData().then(response => {
-        this.setState({
-          adminPhonenumber: response.data.userLoggedin.phonenumber,
-          userLoginId:response.data.userLoggedin._id
+      // this.getLoginData();
+    }
+  
 
-        })
-        console.log(this.state);
-      })
-    }
-    sendText= ()=>{
-      axios.get(`/api/twilio/sendText?recipient=+1${this.state.adminPhonenumber}&textMessage=${this.state.responseText}`)
-      .catch(err =>  console.log(err));
-    }
     loadItems = () => {
       API.getItems(this.props.match.params.id)
         .then(res =>{
           console.log(res)
-          // this.setState({ items: res.data, mood: "", topic: "", response: ""})
+          this.setState({ items: res.data, mood: "", topic: "", response: ""})
         }
 
         )
         .catch(err => console.log(err));
     }
 
-    // loadItems = () => {
-    //   API.getLoginIn()
-    //     .then(res =>
-    //       this.setState({ userLoggedin: res.data, username: ""})
-    //     )
-    //     .catch(err => console.log(err));
-    // }
+    getLoginData =() => {
+      API.loginData().then(response => {
+        console.log(response);
+        // this.setState({
+        //   userLoginId:response.data.userLoggedin._id
+        // })
+      });
+    };
     
 
     handleInputChange = event => {
@@ -96,76 +83,59 @@ class AnswerSurvey extends Component {
       this.setState({
         [name]: value
       });
-      console.log(event.target.value);
+      console.log(event.target.value)
     };
+
     handleFormSubmit = event => {
-      const id = this.state.userLoggedIn;
+      const id =this.props.match.params.id;
       event.preventDefault();
+
       if (this.state.response
-          // && this.state.topic
         ) {
-        //   console.log(this.state.recipient);
-        // this.sendText();
-        API.saveItem( id,{
-           response: this.state.responseText
-          // details: this.state.details
+        API.saveResponse( id,
+          {
+           response: this.state.response
         })
-          .then(res => this.loadItems())
+          .then(res => {
+            console.log(res);
+          })
           .catch(err => console.log(err));
       }
+      
     };
-
-
-
-// //   onSortEnd = ({oldIndex, newIndex}) => {
-// //     this.setState({
-// //       items: arrayMove(this.state.items, oldIndex, newIndex),
-// //     });
-// //   };
-
     
       render() {
         return (
           <Container fluid>
-            <Col size="md-12">
-            <Row>
-              
+          <Row>
+            <Col size="md-12">  
               <Jumbotron>
               <h1>Cheer Up</h1>
               <span>{this.state.mood}</span> <span>{this.state.topic}</span>
-                </Jumbotron></Row><Row>
-                  {this.state.items.length ? (
-                    <List>
-                    {this.state.items.map(item => (
-                          <ListItem key={item._id}>
-                        <Link to={"/items/" + item._id}>
-                        <strong>
-                           I am {item.mood} about {item.topic
-                             }
-                         </strong>
-                            </Link>
-                          </ListItem>
-                          ))}
-                        </List>
-                      ) : (<h1></h1>
-                      )}
-         </Row>
-         <form>
-                        <TextArea
-                                            value={this.state.responseText}
-                                            onChange={this.handleInputChange}
-                                            name="responseText"
-                                            placeholder="Pick your friend up"
-                                          />
-                        <FormBtn
-                        disabled={!(
-                          this.state.responseText )}
-                        onClick={this.handleFormSubmit}
-                        >
-                        Send a smile
-                        </FormBtn>
-                        </form>
+                </Jumbotron>
+          <Form>
+          <FormGroup>
+            <Label for="response">Text Area</Label>
+          <Input 
+          type="textarea"
+           name="response" 
+           id="response" 
+           value= {this.state.response}
+           onChange ={this.handleInputChange}
+           />
+        </FormGroup>
+        <FormGroup>
+          <Button
+          outline color ="info"
+          type ="submit"
+          onClick= {this.handleFormSubmit}
+          >
+            Submit
+          </Button>
+        </FormGroup>
+        </Form>
        </Col>
+       </Row>
      </Container>
         );
       }
