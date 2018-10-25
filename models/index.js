@@ -1,6 +1,7 @@
 module.exports = {
     Admin: require("./admin"),
     VotingResults: require("./VotingResults"),
-    Item: require("./item")
+    Item: require("./item"),
+    response: require("./response")
   };
   

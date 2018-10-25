@@ -14,6 +14,7 @@ class Signup extends Component {
 			email:'',
 			username: '',
 			password: '',
+			phonenumber: '',
 			modal:false
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,7 +29,8 @@ class Signup extends Component {
 			lastname: this.state.lastname,
 			email: this.state.email,
 			username: this.state.username,
-			password: this.state.password
+			password: this.state.password,
+			phonenumber: this.state.phonenumber
 		})
 			.then(response => {
 				console.log(response)
@@ -42,6 +44,7 @@ class Signup extends Component {
 						email:'',
 						username: '',
 						password: '',
+						phonenumber:'',
 						modal:false
 					});
 					console.log(this.state);
@@ -72,7 +75,7 @@ class Signup extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 		// check the the user fill out all information
-		if(this.state.firstname && this.state.lastname && this.state.username && this.state.email && this.state.password) {
+		if(this.state.firstname && this.state.lastname && this.state.username && this.state.email && this.state.password && this.state.phonenumber) {
 			this.savedAdmin();
 		}
 		else {
@@ -129,6 +132,17 @@ render() {
 							name="username"
 							placeholder="Username"
 							value={this.state.username}
+							onChange={this.handleChange}
+							/>
+						</FormGroup>
+						<FormGroup>
+							<Label for ="phonenumber"> Phone Number</Label>
+							<Input
+							type="number"
+							id="phonenumber"
+							name="phonenumber"
+							placeholder="Phone number"
+							value={this.state.phonenumber}
 							onChange={this.handleChange}
 							/>
 						</FormGroup>

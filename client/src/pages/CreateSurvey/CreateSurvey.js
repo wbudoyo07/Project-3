@@ -46,7 +46,7 @@ class CreateSurvey extends Component {
     };
     // send message to twilio routes
     sendText = ()=> {
-      axios.get(`/api/twilio/sendText?recipient=+1${this.state.recipient}&textMessage=www.google.com`)
+      axios.get(`/api/twilio/sendText?recipient=+1${this.state.recipient}&textMessage=localhost/3000/${this.state.messsageId}`)
       .catch(err =>  console.log(err));
       }
 
@@ -63,20 +63,27 @@ class CreateSurvey extends Component {
         });
       };
       handleFormSubmit = event => {
-        const id= this.state.userLoginId
+        const id= this.state.userLoginId;
         event.preventDefault();
         if (this.state.mood
             && this.state.topic
           ) {
             console.log(this.state.recipient);
-          this.sendText();
           API.saveItem(id,
           {
             mood: this.state.mood,
             topic: this.state.topic,
             // details: this.state.details
           })
-            .then(res => this.loadItems())
+            .then(res => {
+              // this.loadItems()
+              console.log(res.data.message.slice(-1)[0]);
+              this.setState({
+                messsageId:res.data.message.slice(-1)[0]
+              });
+              this.sendText();
+            }
+              )
             .catch(err => console.log(err));
         }
       };
