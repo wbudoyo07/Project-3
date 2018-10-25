@@ -8,8 +8,11 @@ import { List, ListItem } from "../../components/List";
 //import { Input, TextArea, InputInfo, FormBtn } from "../../components/Form";
 import axios from "axios";
 import Navbar from "../../components/Navbar";
+// import WOW from "wowjs";
+import Skills from "../../components/Skills"
 import { Col, Row, Container, Button, Form, 
   FormGroup, Label, Input, FormText, Footer, Modal, ModalBody, ModalFooter} from 'reactstrap';
+  
 
 
 class CreateSurvey extends Component {
@@ -125,7 +128,9 @@ class CreateSurvey extends Component {
                 <Jumbotron>
                   <h1 className="display-1"><strong>NWORF</strong></h1>
                   <h4>Turn that frown upside down.</h4>
+                  
                 </Jumbotron>
+                {/* <Skills /> */}
 <Form>
                 <FormGroup>
          <Label for="mood">I’m feeling</Label>
