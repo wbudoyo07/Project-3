@@ -12,6 +12,11 @@ router.route("/")
 //     .put(adminController.update)
 //     .delete(adminController.remove);
 
+
+// Matches with /api/admin/populatedAdmin
+router.route("/populateAdmin")
+      .get(adminController.populateAdmin);
+      
 //Matches with /api/admin/login
 router.post(
     '/login',

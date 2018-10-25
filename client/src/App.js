@@ -18,7 +18,7 @@ const App = () => (
         <Route exact path="/" component={Login} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/AnswerSurvey" component={AnswerSurvey} />
+        <Route exact path="/answersurvey/:id" component={AnswerSurvey} />
         {/* In Order to access to private route the use must logged in */}
         <PrivateRoute exact path="/aboutus" component={AboutUs} />
         <PrivateRoute exact path="/surveyoptions" component={SurveyOption} />

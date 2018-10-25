@@ -38,14 +38,29 @@ class AnswerSurvey extends Component {
     };
   
     componentDidMount() {
-      this.loadItems();
+      // this.loadItems();
+      API.getItem(this.props.match.params.id)
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          mood: res.data.mood,
+          topic: res.data.topic
+        })
+      }
+        // this.setState({ book: res.data })
+      
+        )
+      .catch(err => console.log(err));
     }
   
 
     loadItems = () => {
-      API.getItems()
-        .then(res =>
-          this.setState({ items: res.data, mood: "", topic: "", response: ""})
+      API.getItems(this.props.match.params.id)
+        .then(res =>{
+          console.log(res)
+          // this.setState({ items: res.data, mood: "", topic: "", response: ""})
+        }
+
         )
         .catch(err => console.log(err));
     }
@@ -101,6 +116,7 @@ class AnswerSurvey extends Component {
               
               <Jumbotron>
               <h1>Cheer Up</h1>
+              <span>{this.state.mood}</span> <span>{this.state.topic}</span>
                 </Jumbotron></Row><Row>
                   {this.state.items.length ? (
                     <List>

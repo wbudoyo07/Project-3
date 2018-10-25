@@ -7,12 +7,14 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, InputInfo, FormBtn } from "../../components/Form";
 import axios from "axios";
+import Navbar from "../../components/Navbar";
 
 class CreateSurvey extends Component {
 
     state = {
         items: [],
-        id: "",
+        messsageId: "",
+        userLoginId: "",
         mood: "",
         topic: "",
         response: "",
@@ -24,6 +26,7 @@ class CreateSurvey extends Component {
     
       componentDidMount() {
         this.loadItems();
+        this.getLoginData();
       }
     
       loadItems = () => {
@@ -34,6 +37,13 @@ class CreateSurvey extends Component {
           .catch(err => console.log(err));
       };
 
+    getLoginData =() => {
+      API.loginData().then(response => {
+        this.setState({
+          userLoginId:response.data.userLoggedin._id
+        })
+      });
+    };
     // send message to twilio routes
     sendText = ()=> {
       axios.get(`/api/twilio/sendText?recipient=+1${this.state.recipient}&textMessage=www.google.com`)
@@ -53,13 +63,15 @@ class CreateSurvey extends Component {
         });
       };
       handleFormSubmit = event => {
+        const id= this.state.userLoginId
         event.preventDefault();
         if (this.state.mood
             && this.state.topic
           ) {
             console.log(this.state.recipient);
           this.sendText();
-          API.saveItem({
+          API.saveItem(id,
+          {
             mood: this.state.mood,
             topic: this.state.topic,
             // details: this.state.details
@@ -72,6 +84,7 @@ class CreateSurvey extends Component {
       render() {
         return (
           <Container fluid>
+          <Navbar />
             <Row>
               <Col size="md-6">
                 <Jumbotron>

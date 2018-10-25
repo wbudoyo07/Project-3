@@ -21,7 +21,7 @@ export default {
   // Gets all Items
   getItems: function() {
     return axios.get("/api/items");
-  }
+  },
   // Gets the Item with the given id
   getItem: function(id) {
     return axios.get("/api/items/" + id);
@@ -31,10 +31,13 @@ export default {
     return axios.delete("/api/items/" + id);
   },
   // Saves a Item to the database
-  saveItem: function(itemData) {
-    return axios.post("/api/items", itemData);
+  saveItem: function(id,itemData) {
+    return axios.post("/api/items/"+id, itemData);
   },
-
+  // data of join collection
+  populateData : function() {
+    return axios.get("/api/populatedData");
+  },
   //Twilio send message
   sendText : function() {
     return axios.get("/api/twilio/sendText");
@@ -51,8 +54,5 @@ export default {
    // get all datas  form the authentication 
   loginData : function() {
     return axios.get('/api/admin/login');
-  },
-
-  
-
+  }
 };
