@@ -10,6 +10,11 @@ import SurveyOption from "./pages/SurveyOption";
 import VoteResults from "./pages/VoteResults";
 import NoMatch from "./pages/NoMatch";
 import PrivateRoute from "./components/PrivateRoute";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGhost } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faGhost)
 
 const App = () => (
   <Router>
