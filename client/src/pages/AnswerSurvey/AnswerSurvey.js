@@ -17,7 +17,8 @@ class AnswerSurvey extends Component {
       mood: "",
       topic: "",
       response: "",
-      recipient: ""
+      recipient: "",
+      username:""
     };
   
     componentDidMount() {
@@ -30,7 +31,8 @@ class AnswerSurvey extends Component {
         this.setState({
           mood: res.data.mood,
           topic: res.data.topic,
-          phonenumber: res.data.phonenumber
+          phonenumber: res.data.phonenumber,
+          username: res.data.username
         })
       }
         // this.setState({ book: res.data })
@@ -92,7 +94,9 @@ class AnswerSurvey extends Component {
             <Col size="md-12">  
               <Jumbotron>
               <h1>Cheer Up</h1>
-              <span>{this.state.mood}</span> <span>{this.state.topic}</span>
+              <span>{this.state.username} is </span>
+              <span>{this.state.mood} about </span> 
+              <span>{this.state.topic}</span>
                 </Jumbotron>
           <Form>
           <FormGroup>

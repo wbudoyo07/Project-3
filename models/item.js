@@ -5,6 +5,7 @@ const itemSchema = new Schema({
   mood: { type: String, required: true },
   topic: { type: String, required: true },
   phonenumber: { type: Number, required: false },
+  username: {type:String, require: false},
   date: { type: Date, default: Date.now },
   response:[
     {
