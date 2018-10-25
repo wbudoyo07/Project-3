@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import Nav from "../../components/Navbar";
 import { Container, Row, Col, Button } from 'reactstrap';
+import "./SurveyOptions.css";
 
 class SurveyOption extends Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container className="surveyOptions" fluid>
         <Nav />
-        <Row>
+        <Row >
           <Col>
             <Button
+              className="createSurvey-btn"
               href="/createsurvey"
               outline color ="info"
               size="lg"
@@ -22,15 +24,6 @@ class SurveyOption extends Component {
           </Row>
           <Row>
           <Col>
-            <Button
-            type ="submit"
-            href="/previoussurvey"
-            outline color ="info"
-            size ="lg"
-            block
-            >
-              Previous Survey
-            </Button>
           </Col>
         </Row>
       </Container>
