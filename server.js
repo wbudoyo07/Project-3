@@ -21,7 +21,7 @@ app.use(session({ secret: "keyboard cat", resave: false, saveUninitialized: fals
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Serve up static assets (usually on heroku)
+// Server up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
