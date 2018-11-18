@@ -1,7 +1,7 @@
 require('dotenv').config()
 const router = require("express").Router();
-const accountSid = process.env.ACCOUNT_SID;
-const authToken =  process.env.AUTH_TOKEN;
+const accountSid = "AC8bf83e35aba5d33ad2bbfd66c94cace1";
+const authToken =  "95365de33c694579fc288425a5c1a916";
 const client = require('twilio')(accountSid, authToken);
 
 // Matches with "/api/twilio/sendText"
